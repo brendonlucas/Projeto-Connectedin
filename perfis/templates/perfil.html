@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="box_perfil1" id="box_perfil" style="background-image: url(https://files.mormonsud.net/wp-content/uploads/2017/07/lanterna-e-estrelas.jpg) ">
+        <img class="foto_perfil1" width="150" height="150" src="https://abrilveja.files.wordpress.com/2016/06/jared-leto-caracterizado-de-coringa-em-primeira-foto-oficial-de-esquadrao-suicida-original1.jpeg?quality=70&strip=info&w=677" alt="capa">
+        <button class="bt_mais1"> ... </button>
+        <button class="bt_solicitacao1"> Enviar solicitação </button>
+        <p class="nome_perfil1"> {{ perfil.nome }}</p>
+    </div>
+    <div class="pag_2_1" style="background-color: white">
+        <div class="box_info1">
+            <p class="name_box1">Apresentação</p>
+            <hr>
+            <p class="name_box1">Nome: {{ perfil.nome }} </p>
+            <p class="name_box1">Email: {{ perfil.email }} </p>
+            <p class="name_box1">Telefone: {{ perfil.telefone }}</p>
+            <p class="name_box1">Empresa: {{ perfil.nome_empresa }}</p>
+            <br>
+        </div>
+
+        <div class="box_publics1">
+            <div class="post_rapido1">
+                <label for="box_text" style="text-align: left"> No que voçê esta pensando {{ perfil.nome }}?</label><br><br>
+                <textarea id="box_text" class="input_post1" maxlength="150"> </textarea>
+                <button class="but_public1"> Publicar </button>
+                <input class="but_public1" title="image" type="file" style="width: 120px">
+            </div>
+            <br>
+
+            <div class="postagem1">
+                <div style="height: auto">
+                    <img class="foto_perfil_pub1" width="40" height="40" src="https://abrilveja.files.wordpress.com/2016/06/jared-leto-caracterizado-de-coringa-em-primeira-foto-oficial-de-esquadrao-suicida-original1.jpeg?quality=70&strip=info&w=677" alt="capa">
+                    <a href="#" class="name_perfil">{{ perfil.nome }}</a>
+                    <button style="float: right;">...</button>
+
+                </div>
+                    <hr>
+                <div class="conteudo_public1">
+                    <p class="text_public1">
+                        dd
+                    </p>
+
+                </div>
+
+                <div style=" text-align: center" >
+                    <button class="bt_acao1">Curtir</button>
+                    <button class="bt_acao1">Comentar</button>
+                    <button class="bt_acao1">Compartilhar</button>
+                </div>
+
+            </div>
+            <br>
+
+            <div class="postagem1">
+                <div style="height: auto">
+                    <img class="foto_perfil_pub1" width="40" height="40" src="https://abrilveja.files.wordpress.com/2016/06/jared-leto-caracterizado-de-coringa-em-primeira-foto-oficial-de-esquadrao-suicida-original1.jpeg?quality=70&strip=info&w=677" alt="capa">
+                    <a href="#" class="name_perfil">Brendon Lucas</a>
+                    <button style="float: right;">...</button>
+                </div>
+                    <hr>
+                <div class="conteudo_public1">
+                    <p class="text_public1"> hga sj asd as dasd a dds a dwd awdhga sj asd as dasd a dds a dwd awdhga sj asd as dasd a dds a dwd awdhga sj asd as dasd a dds a dwd awd as dw haskawh wkaw dkahwdk </p>
+                    <img src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" class="img_post1" alt="img post">
+                </div>
+                <div>
+                    <p style="margin-left: 15px"> 9998 Curtidas</p>
+                </div>
+                <div style=" text-align: center" >
+                    <button class="bt_acao1">Curtir</button>
+                    <button class="bt_acao1">Comentar</button>
+                    <button class="bt_acao1">Compartilhar</button>
+                </div>
+            </div> <br>
+
+            <div class="postagem1">
+                <div style="height: auto">
+                    <img class="foto_perfil_pub1" width="40" height="40" src="https://abrilveja.files.wordpress.com/2016/06/jared-leto-caracterizado-de-coringa-em-primeira-foto-oficial-de-esquadrao-suicida-original1.jpeg?quality=70&strip=info&w=677" alt="capa">
+                    <a href="#" class="name_perfil">Brendon Lucas</a>
+                    <button style="float: right;">...</button>
+                </div>
+                    <hr>
+                <div class="conteudo_public1">
+                    <img src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" class="img_post1" alt="img post">
+                </div>
+            </div> <br>
+
+        </div>
+
+        <div class="box_amigos1">
+            <a href="#" style="text-decoration: none;" > <p class="name_box1">Amigos</p></a>
+            <hr>
+            <ul class="grid_amigos">
+                <li class="grid_item" >
+                    <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                    <a href="" class="name_in_grid" > Geremias</a>
+                </li>
+                <li class="grid_item" >
+                    <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                    <a href="" class="name_in_grid" > geremias</a>
+                </li>
+                <li class="grid_item" >
+                    <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                    <a href="" class="name_in_grid" > geremias</a>
+                </li>
+                <li class="grid_item" >
+                    <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                    <a href="" class="name_in_grid" > geremias</a>
+                </li>
+                <li class="grid_item" >
+                    <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                    <a href="" class="name_in_grid" > geremias</a>
+                </li>
+                <li class="grid_item" >
+                    <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                    <a href="" class="name_in_grid" > geremias</a>
+                </li>
+                <li class="grid_item" >
+                    <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                    <a href="" class="name_in_grid" > geremias</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+{% endblock %}		

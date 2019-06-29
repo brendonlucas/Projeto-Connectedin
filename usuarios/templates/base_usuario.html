@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt-br" class="login_c" style="height: 100%">
+<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link rel="stylesheet"
+			 href="{% static 'styles/bootstrap.css' %}">
+		<link rel="stylesheet"
+			 href="{% static 'styles/main.css' %}">
+	</head>
+<body style="overflow-x: auto; margin-top: -20px; height: auto" class="login_b" >
+
+<div class="head_titulo2">
+    <img class="img_titulo2" src="https://i.imgur.com/K82jQtY.png" alt="logo">
+    <a class="link_entrar2" href="">Registrar</a>
+</div>
+
+<div class="conteudo_dentro" >
+    {% block body%}
+    {% endblock %}
+
+</div>
+
+</body>
+</html>
