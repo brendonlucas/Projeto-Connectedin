@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
 {% block body %}
 <div class="meio">
-        <nav class="lado_esquerdo">
-            <p class="name_box"> Amigos </p>
-            <ul class="ul_box_amigos">
-                <li class="li_item">
-                    <img class="img_perfil_amigos" src="https://img.ibxk.com.br/2017/06/22/22100428046161.jpg" alt="perfil">
-                    <a href="#" class="name_perfil_amigos"> adeilton</a>
-                    <button class="bt_opcoes_amigo">...</button>
-                </li>
-            </ul>
-        </nav>
-        <div class="box_public_center">
+    <nav class="lado_esquerdo">
+        {% with total=perfil_logado.contatos.count %}
+            {% if total %}
+                <p class="name_box"> {{ total }}Contato{{ total|pluralize }} </p>
+                    <ul class="ul_box_amigos">
+                        {% for perfil in perfil_logado.contatos.all %}
+                            <li class="li_item" style="margin-bottom:5px;">
+                                <img class="img_perfil_amigos" src="https://img.ibxk.com.br/2017/06/22/22100428046161.jpg" alt="perfil">
+                                    <a href="{% url 'exibir' perfil.id %}" class="name_perfil_amigos"> {{ perfil.user.username }} </a>
+                                        <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
+                                            <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" class="but_opcoes_post1" data-toggle="dropdown"  alt="config">
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#" class="item_menu_hover">Desfazer</a></li>
+                                                </ul>
+                                        </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+            {% else %}
+                <p class="name_box"> Sem Contatos </p>
+            {% endif %}
+        {% endwith %}
+    </nav>
+
+    <div class="box_public_center">
             <div class="post_rapido">
                 <label for="box_text" style="text-align: left; color: white"> No que voçê esta pensando Arnaldo?</label><br><br>
                 <textarea id="box_text" class="input_post" maxlength="150"> </textarea>
@@ -23,9 +37,14 @@
             <div class="postagem">
                 <div class="div_titulo" style="height: auto">
                     <img class="foto_perfil_pub" width="40" height="40" src="https://abrilveja.files.wordpress.com/2016/06/jared-leto-caracterizado-de-coringa-em-primeira-foto-oficial-de-esquadrao-suicida-original1.jpeg?quality=70&strip=info&w=677" alt="capa">
-                    <a href="#" class="name_perfil">Brendon Lucas</a>
-                    <button class="but_opcoes_post" style="float: right;">...</button>
-
+                    <a href="" class="name_perfil">Brendon Lucas</a>
+                    <div class="btn-group dropleft" style="float: right">
+                    <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" class="but_opcoes_post1" data-toggle="dropdown" style="float: right;" alt="config">
+                        <ul class="dropdown-menu" role="menu" >
+                            <li><a href="#" class="item_menu_hover">Editar</a></li>
+                            <li><a href="#" class="item_menu_hover">Excluir</a></li>
+                        </ul>
+                    </div>
                 </div>
                     <hr>
                 <div class="conteudo_public">
@@ -48,7 +67,13 @@
                 <div style="height: auto">
                     <img class="foto_perfil_pub" width="40" height="40" src="https://abrilveja.files.wordpress.com/2016/06/jared-leto-caracterizado-de-coringa-em-primeira-foto-oficial-de-esquadrao-suicida-original1.jpeg?quality=70&strip=info&w=677" alt="capa">
                     <a href="#" class="name_perfil">Brendon Lucas</a>
-                    <button style="float: right;">...</button>
+                    <div class="btn-group dropleft" style="float: right">
+                    <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" class="but_opcoes_post1" data-toggle="dropdown" style="float: right;" alt="config">
+                        <ul class="dropdown-menu" role="menu" >
+                            <li><a href="#" class="item_menu_hover">Editar</a></li>
+                            <li><a href="#" class="item_menu_hover">Excluir</a></li>
+                        </ul>
+                </div>
                 </div>
                     <hr>
                 <div class="conteudo_public">
@@ -69,7 +94,13 @@
                 <div style="height: auto">
                     <img class="foto_perfil_pub" width="40" height="40" src="https://abrilveja.files.wordpress.com/2016/06/jared-leto-caracterizado-de-coringa-em-primeira-foto-oficial-de-esquadrao-suicida-original1.jpeg?quality=70&strip=info&w=677" alt="capa">
                     <a href="#" class="name_perfil">Brendon Lucas</a>
-                    <button style="float: right;">...</button>
+                    <div class="btn-group dropleft" style="float: right">
+                    <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" class="but_opcoes_post1" data-toggle="dropdown" style="float: right;" alt="config">
+                        <ul class="dropdown-menu" role="menu" >
+                            <li><a href="#" class="item_menu_hover">Editar</a></li>
+                            <li><a href="#" class="item_menu_hover">Excluir</a></li>
+                        </ul>
+                    </div>
                 </div>
                     <hr>
                 <div class="conteudo_public">
@@ -79,34 +110,56 @@
         </div>
 
         <aside class="lado_direito">
-            <p class="name_box"> Pedidos de Amizade </p>
-            <ul class="ul_box_amigos">
-                <li class="li_item">
-                    <img class="img_perfil_amigos" src="https://img.ibxk.com.br/2017/06/22/22100428046161.jpg" alt="perfil">
-                    <a href="#" class="name_perfil_amigos"> adeilton</a>
-                    <button class="bt_opcoes_amigo">...</button>
-                </li>
+            {% with total=perfil_logado.convites_recebidos.count %}
+                {% if total %}
+                    <p class="name_box"> {{ total }} Convite{{ total|pluralize }} de Amizade </p>
+                        <ul class="ul_box_amigos">
+                            {% for convite in perfil_logado.convites_recebidos.all %}
+                                <li class="li_item" style="margin-bottom:5px;">
+                                    <img class="img_perfil_amigos" src="https://img.ibxk.com.br/2017/06/22/22100428046161.jpg" alt="perfil">
+                                        <a href="{% url 'exibir' convite.solicitante.id %}" class="name_perfil_amigos"> {{ convite.solicitante.user.username }} </a>
+                                            <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
+                                                <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" class="but_opcoes_post1" data-toggle="dropdown"  alt="config">
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="{% url 'aceitar' convite.id %}" class="item_menu_hover">Aceitar</a></li>
+                                                        <li><a href="#" class="item_menu_hover">Recusar</a></li>
+                                                        <li><a href="#" class="item_menu_hover">Bloquear</a></li>
+                                                    </ul>
+                                            </div>
+                                </li>
+                            {% endfor %}
+                    </ul>
+                {% else %}
+                     <p class="name_box"> Sem convites </p>
+                {% endif %}
+            {% endwith %}
 
-                <li class="li_item">
-                    <img class="img_perfil_amigos" src="https://img.ibxk.com.br/2017/06/22/22100428046161.jpg" alt="perfil">
-                    <a href="#" class="name_perfil_amigos"> adeilton</a>
-                    <button class="bt_opcoes_amigo">...</button>
-                </li>
-            </ul> <hr>
-
-            <p class="name_box"> Seus Pedidos </p>
-            <ul class="ul_box_amigos">
-                <li class="li_item">
-                    <img class="img_perfil_amigos" src="https://img.ibxk.com.br/2017/06/22/22100428046161.jpg" alt="perfil">
-                    <a href="#" class="name_perfil_amigos"> adeilton</a>
-                    <button class="bt_opcoes_amigo">...</button>
-                </li>
-
-            </ul>
-
-
+            <hr>
+            {% with total=perfil_logado.convites_feitos.count %}
+                {% if total %}
+                    <p class="name_box"> {{ total }} Convite{{ total|pluralize }} feito</p>
+                        <ul class="ul_box_amigos">
+                        {% for convite in perfil_logado.convites_feitos.all %}
+                            <li class="li_item" style="margin-bottom:5px;">
+                                <img class="img_perfil_amigos" src="https://img.ibxk.com.br/2017/06/22/22100428046161.jpg" alt="perfil">
+                                    <a href="{% url 'exibir' convite.convidado.id %}" class="name_perfil_amigos"> {{ convite.convidado.user.username }} </a>
+                                        <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
+                                            <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" class="but_opcoes_post1" data-toggle="dropdown"  alt="config">
+                                                <ul class="dropdown-menu" role="menu" style="background-color: white">
+                                                    <li><a href="#" class="item_menu_hover">Cancelar</a></li>
+                                                </ul>
+                                        </div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                {% else %}
+                    <p class="name_box"> Sem convites </p>
+                {% endif %}
+            {% endwith %}
         </aside>
-
-
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 {% endblock %}

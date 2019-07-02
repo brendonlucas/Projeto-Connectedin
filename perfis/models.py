@@ -1,21 +1,23 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-
-# Create your models here.
 
 class Perfil(models.Model):
-    nome = models.CharField(max_length=255, null=False)
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE, null=True)
     telefone = models.CharField(max_length=20, null=False)
     nome_empresa = models.CharField(max_length=255, null=False)
-    email = models.CharField(max_length=255, null=False)
     contatos = models.ManyToManyField('Perfil')
 
-    def __str__(self):
-        return self.nome
+    @property
+    def email(self):
+        return self.user.email
 
     def convidar(self, perfil_convidado):
         convite = Convite(solicitante=self, convidado=perfil_convidado)
+        print(self.id)
+        print(perfil_convidado.id)
         convite.save()
+        print('ddd')
 
 
 class Convite(models.Model):

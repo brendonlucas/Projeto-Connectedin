@@ -1,0 +1,20 @@
+{% with total=perfil.contatos.count %}
+    {% if total %}
+        <a href="#" style="text-decoration: none;" > <p class="name_box1"> {{ total }}Amigos</p></a>
+            <hr>
+                <ul class="grid_amigos">
+                    {% for perfil in perfil.contatos.all %}
+                        <li class="grid_item" style="margin-bottom:5px;">
+                            <img class="img_ic_frind" src="https://media.istockphoto.com/photos/retro-future-picture-id813910894?k=6&m=813910894&s=612x612&w=0&h=lVH4NYQ3011tEaIFJ4vBv-EdUDSkq1VqMTl8ShJrFi4=" alt="ff">
+                                <a href="{% url 'exibir' perfil.id %}" class="name_in_grid"> {{ perfil.user.username }} </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+    {% else %}
+        <p class="name_box">0 Amigos</p>
+    {% endif %}
+{% endwith %}
+
+
+
+

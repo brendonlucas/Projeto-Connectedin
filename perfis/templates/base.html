@@ -14,14 +14,13 @@
 	<body style="overflow-x: auto">
         <div class="barra_superior">
             <form class="form_barra" method="post">
-                <a href="{% url 'index'%}" > <img src="https://i.imgur.com/joazmPq.png" class="botao_pagina_inicial"  alt="logo"> </a>
+                <a href="{% url 'index'%}" > <img src="https://i.ibb.co/QKhbzR5/joazmPq.png" class="botao_pagina_inicial"  alt="logo"> </a>
                 <label for="busca"></label>
                 <input class="pesquisa" placeholder="Pesquisa" id="busca">
-                <a href="{% url 'index'%}" > <img src="https://i.imgur.com/1Jg8wzw.png" class="botao_pagina_inicial" style="width:35px" alt="logo"> </a>
-
-                <a href="{% url 'exibir' 1%}" class="link_pagina"> {{ perfil_logado.nome }}</a>
+                <a href="{% url 'index'%}" > <img src="https://i.ibb.co/ZM1dK35/1Jg8wzw.png" class="botao_pagina_inicial" style="width:35px" alt="logo"> </a>
+                <a href="{% url 'exibir' perfil_logado.id %}" class="link_pagina"> {{ perfil_logado.user.username }}</a>
                 <a href="{% url 'index'%}" class="link_pagina"> Pagina Inicial</a>
-                <a href="" class="link_pagina"> Sair </a>
+                <a href="{% url 'logout'%}" class="link_pagina"> Sair </a>
             </form>
         </div>
         <div class="conteudo" style="overflow-x: auto">

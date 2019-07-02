@@ -93,6 +93,7 @@ body {
     }
 
     .botao_pagina_inicial{
+        text-decoration:none;
         margin-right: 5px;
         height: 30px;
         width: 30px;
@@ -131,26 +132,25 @@ body {
     .link_pagina{
         color: white;
         padding: 5px;
-        text-decoration: none;
+        border-radius:5px;
 
     }
+    .link_pagina:hover{
+        color: black;
+        background-color: white;
+        border-radius:5px;
+        text-decoration:none;
+    }
     .link_pagina:active {
-        background-color: #3C5BE1;
+        background-color: black;
+        color:white;
+        text-decoration:none;
 
     }
     .link_pagina :link :visited{
         color: white;
 
     }
-
-    .link_pagina :hover{
-        color: black;
-        background-color: #3C5BE1;
-
-    }
-
-
-
 
     .input_post{
         width: 100%;
@@ -175,6 +175,28 @@ body {
         height: auto;
 
     }
+
+    .but_opcoes_post1{
+    margin:5px;
+        height:18px;
+        width:18px;
+        color:black;
+        border-radius:3%;
+        background-color: transparent;
+        filter: saturate(1%);
+
+    }
+
+    .but_opcoes_post1:hover{
+        filter: brightness(0.0);
+
+    }
+
+    .but_opcoes_post1:active{
+        filter: brightness(20);
+
+    }
+
     .but_public{
         float: right;
         background-color: #ffffff;
@@ -341,6 +363,7 @@ body {
         width: 90%;
         height: auto;
         background-color: #1d1d1c;
+        box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 10px 20px 0 rgba(75, 75, 75, 0.32);
         border-radius: 5px;
 
     }
@@ -349,9 +372,34 @@ body {
         text-decoration: none;
     }
 
+    .name_perfil:hover {
+        color: white;
+        opacity: 0.6;
+        text-decoration: none;
+    }
+
+    .name_perfil:visited {
+        color: white;
+        opacity: 0.6;
+        text-decoration: none;
+    }
+
+    .name_perfil:active{
+        color: white;
+        text-decoration: none;
+    }
+
+
+
+
+
+
+
+
     .foto_perfil_pub{
         border-radius: 50%;
         margin: 10px;
+        box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
     }
 
 
@@ -395,7 +443,7 @@ body {
         background-image: linear-gradient(#000000, #1a1a19);
         box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
         width: 240px;
-        height: 500px;
+        height: auto;
         overflow-y:auto;
         border-radius: 5px;
 
@@ -447,8 +495,13 @@ body {
         display: inline-flex;
         width: 100%;
         height: auto;
-        background-color: #61635f;
+        background-color: #424242;
 
+    }
+
+    .li_item:hover{
+
+        background-color:#2E2E2E;
     }
 
     .img_perfil_amigos{
@@ -466,6 +519,22 @@ body {
         margin-bottom: auto;
         color: white;
     }
+
+    .name_perfil_amigos:hover{
+        text-decoration:none;
+        color:white;
+    }
+
+     .name_perfil_amigos:active{
+        text-decoration:none;
+        color:white;
+    }
+
+    .name_perfil_amigos:visited{
+        text-decoration:none;
+        color:white;
+    }
+
 
     .bt_opcoes_amigo{
         margin-top: auto;
@@ -517,31 +586,67 @@ body {
 		margin-right: auto;
         margin-top: 20px;
         border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
 
 
     }
     .foto_perfil1{
         border-radius: 50%;
+        box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
 
     }
     .bt_solicitacao1{
         float: right;
         margin-top: 32%;
         margin-right: 20px;
-        background-color: #dddddd;
+
         width: auto;
         padding: 5px;
+        background-color: #ffffff;
+        outline-color: #1b62ed;
+        color: black;
+        border-radius:5px;
 
     }
+
+    .bt_solicitacao1:hover{
+        background-color: black;
+        color: white;
+    }
+
+    .bt_solicitacao1:active{
+        background-color: white;
+        color: black;
+    }
+
+
     .bt_mais1{
         float: right;
         margin-top: 32%;
         margin-right: 40px;
-        background-color: #dddddd;
+
         width: 30px;
         padding: 5px;
 
+
+
+        background-color: #ffffff;
+        outline-color: #1b62ed;
+        color: black;
+        border-radius:5px;
+
     }
+
+    .bt_mais1:hover{
+        background-color: black;
+        color: white;
+    }
+
+    .bt_mais1:active{
+        background-color: white;
+        color: black;
+    }
+
     .pag_2_1{
         width: 800px;
         max-height: available;
@@ -552,7 +657,8 @@ body {
         border-radius: 5px;
     }
     .box_info1{
-        background-color: #96c2ff;
+        background-image: linear-gradient(#000000,#2d2d2c );
+        box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
         margin: 5px;
         width: 38%;
         height: auto;
@@ -560,7 +666,8 @@ body {
         border-radius: 5px;
     }
     .box_publics1{
-        background-color: #000000;
+        background-image: linear-gradient(#000000,#2d2d2c );
+        box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
         width: 60%;
         height: auto;
         float: right;
@@ -569,15 +676,16 @@ body {
     }
 
     .box_amigos1{
-        background-color: #fff439;
+         background-image: linear-gradient(#000000,#2d2d2c );
+         box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
         margin: 5px;
         width: 38%;
         height: auto;
         float: left;
         border-radius: 5px;
 
-
     }
+
 
     .nome_perfil1{
         font-size: 30px;
@@ -588,6 +696,7 @@ body {
     }
 
     .name_box1{
+        color:white;
         font-size: 20px;
         margin: 10px;
         text-decoration: none;
@@ -598,7 +707,7 @@ body {
     .conteudo_public1{
         width: available;
         height: auto;
-        background-color: #fff439;
+
 
     }
 
@@ -607,7 +716,8 @@ body {
         margin-right: 5%;
         width: 90%;
         height: auto;
-        background-color: #ffffff;
+        background-color: #1d1d1c;
+        box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 10px 0 rgba(75, 75, 75, 0.32);
         border-radius: 5px;
 
     }
@@ -632,6 +742,7 @@ body {
 
     .text_public1{
         margin-left: 10px;
+        color: white;
 
 
     }
@@ -639,10 +750,11 @@ body {
         background-color: transparent;
         height: 30px;
         width: 140px;
+        color:white;
     }
 
     .grid_amigos{
-      background-color: #c9302c;
+
       padding: 12px;
       text-align: justify;
 
@@ -677,20 +789,21 @@ body {
       margin-top: 90px;
       color: white;
       text-decoration: none;
-      margin-left: 5px;
+      margin-left: auto;
+      margin-right: auto;
       font-size: 15px;
+      padding:3px
     }
 
 
 /*--------------------------*/
 
-    html.login_c{
+    html{
         height: 100%;
-
     }
 
-    body.login_b{
-        height: available;
+    body{
+
         background-image: linear-gradient(#2d2d2c,#000000);
         margin: 0;
     }
@@ -837,6 +950,7 @@ body {
         background-image: linear-gradient(#000000,#2d2d2c);
         box-shadow: 0 4px 8px 0 rgba(41, 41, 41, 0.36), 0 6px 20px 0 rgba(75, 75, 75, 0.32);
         position: fixed;
+        margin-top: -20px;
 
     }
 
@@ -971,11 +1085,28 @@ body {
         overflow-y: auto;
     }
 
-    .conteudo_dentro{
-        height: auto;
+    .conteudo_dentro1{
+
+        width: 100%; /*kk*/
+        overflow-y: auto;
+    }
+
+    .conteudo_23{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    background-color: blue;
+    width: 370px;
+    padding:10px;
+    border-radius: 5px;
+
+
     }
 
 
+    .link_trocar_foto{
 
+
+    }
 
 

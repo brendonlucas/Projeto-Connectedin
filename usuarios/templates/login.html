@@ -1,22 +1,30 @@
 {% extends 'base_usuario.html' %}
 {% block body %}
-<div class="content_down22" style="height: auto; " >
-<div class="contedudo_2" style="height: auto;">
-    <p class="name_titulo_2"> Entre no Connectedin</p>
-        <form class="form_user2">
-         <label class="name_login2" for="user"> Usuario: </label>
-            <input class="input_custon2" id="user" type="text" placeholder="Usuario" required>
-                <br>
-            <label class="name_login2" for="pass">Senha: </label>
 
-            <input class="input_custon2" id="pass" type="password" placeholder="Senha" required>
+<div class="content_down22" style="height:100%">
+<div class="contedudo_22" style="margin-top: 100px;">
+    <p class="name_titulo_2"> Entre no Connectedin</p>
+        <form class="form_user2" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+         <label class="name_login2" for="username"> Usuario: </label>
+            <input class="input_custon2" id="id_username" name="username" placeholder="Usuario" required>
+                <br>
+            <label class="name_login2" for="id_password" >Senha: </label>
+
+            <input class="input_custon2" id="id_password" name="password" type="password" placeholder="Senha" required>
             <br><br>
-            <button class="bt_logar2" type="submit" >Entrar</button>
+            <button class="bt_logar2" type="submit" value="login" >Entrar</button>
         </form>
-    <a href="" class="txt_recuperar">Esqueci minha senha</a>
-    <img class="img_titulo_2" src="https://i.imgur.com/K82jQtY.png" alt="logo">
+        {% if form.errors %}
+                <div style="padding: 5px; background-color: #ff6d70">
+                    <p >Por favor, verifique o Email e/ou Senha informados </p>
+                </div>
+        {% endif %}
+    <a href="" class="txt_recuperar">Esqueci minha senha</a><br>
+    <a href="{% url 'registrar' %}" class="txt_recuperar">registre-se</a><br>
+    <img class="img_titulo_2" src="https://i.ibb.co/zQB5zCS/K82jQtY.png" alt="logo">
 </div>
-</div>
+    </div>
 
 
 {% endblock %}
