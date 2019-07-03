@@ -14,16 +14,11 @@ class Invite(models.Model):
     sended_at = models.DateField(auto_now_add=True, auto_now=False)
 
     def accept(self):
-        Friendship(user=self.recipient,friend=self.sender).save()
+        self.sender.friendship.add(self.recipient)
+        self.recipient.friendship.add(self.sender)
         self.status = 1
 
     def reject(self):
         self.status = 2
 
-
-class Friendship(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name='friend'),
-    blocked=models.BooleanField(default=False)
-    stated_at = models.DateField(auto_now_add=True, auto_now=False)
 
