@@ -21,15 +21,15 @@ class Migration(migrations.Migration):
                 ('telefone', models.CharField(max_length=20)),
                 ('nome_empresa', models.CharField(max_length=255)),
                 ('email', models.CharField(max_length=255)),
-                ('contatos', models.ManyToManyField(to='perfis.Perfil')),
+                ('contatos', models.ManyToManyField(to='profile.Perfil')),
             ],
         ),
         migrations.CreateModel(
             name='Convite',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('convidado', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='convites_recebidos', to='perfis.Perfil')),
-                ('solicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='convites_feitos', to='perfis.Perfil')),
+                ('convidado', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='convites_recebidos', to='profile.Perfil')),
+                ('solicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='convites_feitos', to='profile.Perfil')),
             ],
         ),
     ]
