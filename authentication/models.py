@@ -1,6 +1,7 @@
 from django.db import models
 import secrets
 import django.contrib.auth.models as adminModels
+# from profile.models import Invite
 
 class User(adminModels.User):
   # USER_STATUS_CHOICES = (
@@ -17,4 +18,7 @@ class User(adminModels.User):
       token = secrets.token_hex(20)
     self.verification_code = token
     super(User, self).save()
+    
+  def send_invite(self, recipient):
+    user.invite.add(recipient=recipient)
     
