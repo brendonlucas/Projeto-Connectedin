@@ -11,6 +11,7 @@ class User(adminModels.User):
   bio = models.CharField(max_length=180, blank=True)
   email_verified = models.DateField(null=True, blank=True, auto_now=False, auto_now_add=False)
   verification_code=models.CharField(max_length=128,blank=False, db_index=True, unique=True)
+  friendship = models.ManyToManyField('User')
 
   def save(self, *args, **kwargs):
     token = secrets.token_hex(20)
