@@ -5,18 +5,18 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 
 from profile.models import *
-from authentication.forms import RegistrarUsuarioForm
+from authentication.forms import UserRegisterForm
 
 
 # @method_decorator(login_required, name='dispatch')
-class RegistrarUsuarioView(View):
+class RegisterUserView(View):
     template_name = 'registrar.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        return render(request, self.template_name, {'form': UserRegisterForm()})
 
     def post(self, request):
-        form = RegistrarUsuarioForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             dados_form = form.cleaned_data
             usuario = User.objects.create_user(username=dados_form['nome'], email=dados_form['email'],
