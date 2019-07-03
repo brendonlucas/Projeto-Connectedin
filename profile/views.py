@@ -20,8 +20,8 @@ def invite_user(request, profile_id):
     current_user(request).send_invite(recipient)
     return redirect('index')
 
-def accept_invite(request, convite_id):
-    invite = Invite.objects.get(id=convite_id)
+def accept_invite(request, invite_id):
+    invite = Invite.objects.get(id=invite_id)
     invite.accept()
     invite.save()
     return redirect('index')

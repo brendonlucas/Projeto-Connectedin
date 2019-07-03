@@ -8,9 +8,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('', include(authUrls)),
-    path('perfil/<int:perfil_id>', views.exibir, name='exibir'),
-    path('perfil/<int:perfil_id>/convidar', views.convidar, name='convidar'),
-    path('convite/<int:convite_id>/aceitar', views.aceitar, name='aceitar'),
+    path('profile/<int:profile_id>', views.show, name='exibir'),
+    path('profile/<int:profile_id>/convidar', views.invite_user, name='convidar'),
+    path('invite/<int:invite_id>/aceitar', views.aceitar, name='aceitar'),
 
 
 ]

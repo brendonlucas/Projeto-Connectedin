@@ -1,32 +1,29 @@
 from django.db import models
-from django.contrib.auth.models import User
+from authentication.models import User
 
 
-class Perfil(models.Model):
-    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE, null=True)
-    telefone = models.CharField(max_length=20, null=False)
-    nome_empresa = models.CharField(max_length=255, null=False)
-    contatos = models.ManyToManyField('Perfil')
+class Invite(models.Model):
+    STATUS_INVITE_CHOICES=(
+        ('0','waiting'),
+        ('1','acepted'),
+        ('2','refused')
+    )
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='senders')
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipients')
+    status = models.CharField(max_length=2,choices=STATUS_INVITE_CHOICES,default='0')
+    sended_at = models.DateField(auto_now_add=True, auto_now=False)
 
-    @property
-    def email(self):
-        return self.user.email
+    def accept(self):
+        Friendship(user=self.recipient,friend=self.sender).save()
+        self.status = 1
 
-    def convidar(self, perfil_convidado):
-        convite = Convite(solicitante=self, convidado=perfil_convidado)
-        print(self.id)
-        print(perfil_convidado.id)
-        convite.save()
-        print('ddd')
+    def reject(self):
+        self.status = 2
 
 
-class Convite(models.Model):
-    solicitante = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='convites_feitos')
-    convidado = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='convites_recebidos')
+class Friendship(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name='friend'),
+    blocked=models.BooleanField(default=False)
+    stated_at = models.DateField(auto_now_add=True, auto_now=False)
 
-    def aceitar(self):
-        self.solicitante.contatos.add(self.convidado)
-        self.convidado.contatos.add(self.solicitante)
-        self.delete()
-
-# t = Perfil(nome="Joelma",nome_empresa="Calipso",telefone="99885522",email="joojo@hotmail.com")
