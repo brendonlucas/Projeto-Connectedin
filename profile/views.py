@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from perfis.models import Perfil, Convite
+from profile.models import Perfil, Convite
 from django.shortcuts import redirect
 
 

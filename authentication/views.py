@@ -4,8 +4,8 @@ from django.shortcuts import *
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 
-from perfis.models import *
-from usuarios.forms import RegistrarUsuarioForm
+from profile.models import *
+from authentication.forms import RegistrarUsuarioForm
 
 
 # @method_decorator(login_required, name='dispatch')

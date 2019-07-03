@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('perfis', '0003_convite_perfil'),
+        ('profile', '0003_convite_perfil'),
     ]
 
     operations = [

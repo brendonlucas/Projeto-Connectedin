@@ -1,6 +1,6 @@
 from django.contrib.auth import views as v
 from django.urls import path, include
-from usuarios.views import RegistrarUsuarioView
+from authentication.views import RegistrarUsuarioView
 
 urlpatterns = [
     path('login/', v.LoginView.as_view(template_name='login.html'), name='login'),
