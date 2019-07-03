@@ -1,47 +1,38 @@
 {% extends 'base_usuario.html' %}
+{% load widget_tweaks %}
 {% block body %}
-
-
-<div class="content_down22">
-    <div class="conteudo_meio22">
-
-<div class="contedudo_22" style="margin-top: 100px">
-    <p class="name_titulo_22"> Crie sua conta do Connectedin</p>
-        <form class="form_user22" method="POST" action="{% url 'registrar' %}">
-            {% csrf_token %}
-            <label class="name_login22" for="nome"> Usuario: </label>
-            <input class="input_custon22" id="nome" name="nome" placeholder="Usuario" required>
-
-            <label class="name_login22" for="email"> Email: </label>
-            <input class="input_custon22" id="email" name="email" type="email" placeholder="example@email.com" required>
-
-            <label class="name_login22" for="senha">Senha: </label>
-            <input class="input_custon22" id="senha" name="senha" type="password" placeholder="Senha" required>
-
-            <label class="name_login22" for="first_name">Primeiro nome: </label>
-            <input class="input_custon22" id="first_name" name="first_name" placeholder="Primeiro nome" required>
-
-            <label class="name_login22" for="last_name">Sobrenome: </label>
-            <input class="input_custon22" id="last_name" name="last_name" placeholder="Sobrenome" required>
-
-            <label class="name_login22" for="telefone">Telefone: </label>
-            <input class="input_custon22" id="telefone" name="telefone"placeholder="Telefone" required>
-
-            <label class="name_login22" for="nome_empresa">Nome da Empresa: </label>
-            <input class="input_custon22" id="nome_empresa" name="nome_empresa" placeholder="Nome da Empresa" required>
-
-            <br><br>
-            <button class="bt_logar22" type="submit" >Confirmar</button>
-        </form>
-        {% if form.errors %}
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                {{form.non_field_errors}}
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-4 offset-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Registre-se
+                    </h4>
+                </div>
+                <div class="card-body">
+                        <form class="form_user22" method="POST" action="{% url 'signup' %}">
+                                {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="form-group">
+                                            {{field.label_tag }}
+                                            {% render_field field class+="form-control" %}
+                                        </div>
+                                    {% endfor%}
+                                <div class="btn-group">
+                                    <button class="btn-primary btn-sm" type="submit" >Confirmar</button>
+                                <a href="{% url 'signin' %}" class="btn-link btn-sm">Já tenho uma conta.</a>
+                                </div>
+                            </form>
+                </div>
             </div>
-       {% endif %}
-
-    <img class="img_titulo_22" src="https://i.ibb.co/zQB5zCS/K82jQtY.png" alt="logo">
-</div>
-</div>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{form.non_field_errors}}
+                </div>
+           {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}

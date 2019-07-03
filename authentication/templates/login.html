@@ -1,30 +1,33 @@
 {% extends 'base_usuario.html' %}
+{% load widget_tweaks %}
 {% block body %}
-
-<div class="content_down22" style="height:100%">
-<div class="contedudo_22" style="margin-top: 100px;">
-    <p class="name_titulo_2"> Entre no Connectedin</p>
-        <form class="form_user2" method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-         <label class="name_login2" for="username"> Usuario: </label>
-            <input class="input_custon2" id="id_username" name="username" placeholder="Usuario" required>
-                <br>
-            <label class="name_login2" for="id_password" >Senha: </label>
-
-            <input class="input_custon2" id="id_password" name="password" type="password" placeholder="Senha" required>
-            <br><br>
-            <button class="bt_logar2" type="submit" value="login" >Entrar</button>
-        </form>
-        {% if form.errors %}
-                <div style="padding: 5px; background-color: #ff6d70">
-                    <p >Por favor, verifique o Email e/ou Senha informados </p>
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-4 offset-4">
+          
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Login
+                    </h4>
                 </div>
-        {% endif %}
-    <a href="" class="txt_recuperar">Esqueci minha senha</a><br>
-    <a href="{% url 'registrar' %}" class="txt_recuperar">registre-se</a><br>
-    <img class="img_titulo_2" src="https://i.ibb.co/zQB5zCS/K82jQtY.png" alt="logo">
-</div>
+                <div class="card-body">
+                        <form class="form" method="POST" action="{% url 'signin' %}">
+                                {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="form-group">
+                                            {{field.label_tag }}
+                                            {% render_field field class+="form-control" %}
+                                        </div>
+                                    {% endfor%}
+                                <div class="btn-group">
+                                    <button class="btn-primary btn-sm" type="submit" >Confirmar</button>
+                                <a href="{% url 'signup' %}" class="btn-link btn-sm">Criar uma conta.</a>
+                                </div>
+                            </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-
+</div>
 {% endblock %}
