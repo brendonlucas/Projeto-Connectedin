@@ -4,8 +4,7 @@ from django.shortcuts import redirect
 from authentication.models import User
 
 def index(request):
-    current_user = current_user(request)
-    src = {'current_user': current_user }
+    src = {'current_user': current_user(request) }
     return render(request, 'index.html', src )
 
 
@@ -15,14 +14,20 @@ def show(request, profile_id):
     return render(request, 'profile.html', args)
 
 
-def invite_user(request, profile_id):
+def invite_friendship(request, profile_id):
     recipient = User.objects.get(id=profile_id)
     current_user(request).send_invite(recipient)
     return redirect('index')
 
-def accept_invite(request, invite_id):
+def accept_friendship(request, invite_id):
     invite = Invite.objects.get(id=invite_id)
     invite.accept()
+    invite.save()
+    return redirect('index')
+
+def refuse_friendship(request, invite_id):
+    invite = Invite.objects.get(id=invite_id)
+    invite.status = 2
     invite.save()
     return redirect('index')
 
