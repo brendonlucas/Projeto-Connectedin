@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="meio">
-    <nav class="lado_esquerdo">
-       
-    </nav>
-
-    
-
-        <aside class="lado_direito">
-            
-        </aside>
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-3">Lado</div>
+        <div class="col col-sm-6">
+            {% if notice %}
+                <p class="alert alert-{{notice.type}}">
+                    {{notice.content}}
+                </p>
+            {% endif %}
+        </div>
+        <div class="col col-sm-3">Lado</div>
+    </div>
 </div>
 {% endblock %}
