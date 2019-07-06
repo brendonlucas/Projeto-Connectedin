@@ -13,19 +13,24 @@
                 </div>
                 <div class="card-body">
                         <form class="form" method="POST" action="{% url 'signin' %}">
-                                {% csrf_token %}
-                                    {% for field in form %}
-                                        <div class="form-group">
-                                            {{field.label_tag }}
-                                            {% render_field field class+="form-control" %}
-                                        </div>
-                                    {% endfor%}
-                                <div class="btn-group">
-                                    <button class="btn-primary btn-sm" type="submit" >Confirmar</button>
+                            {% csrf_token %}
+                            <label for="id_username"> Usuario: </label>
+                            <input class="form-control" id="id_username" name="username" placeholder="Usuario" required><br>
+                            <label class="name_login2" for="id_password" >Senha: </label>
+                            <input class="form-control" id="id_password" name="password" type="password" placeholder="Senha" required><br>
+                            <div class="btn-group">
+                                <button class="btn-primary btn-sm" type="submit" >Confirmar</button>
                                 <a href="{% url 'signup' %}" class="btn-link btn-sm">Criar uma conta.</a>
-                                </div>
+                            </div>
+                            <a href="{% url 'send' %}" class="btn-link btn-sm" style="float: right">Esqueci minha senha.</a>
                             </form>
+
                 </div>
+                {% if form.errors %}
+                <div style="padding: 5px; background-color: #ff6d70">
+                    <p >Por favor, verifique o Email e/ou Senha informados </p>
+                </div>
+        {% endif %}
             </div>
         </div>
     </div>
