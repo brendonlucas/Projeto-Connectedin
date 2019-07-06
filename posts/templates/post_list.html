@@ -7,19 +7,26 @@
     {% endif %}
 
     {% if current_user == post.user %}
-    <a href="{% url 'delete_post' post.id %}">Delete</a>
+        <button data-toggle="modal" data-target="#modal-delete-post">Delete</button>
+
+        <div class="modal" id="modal-delete-post" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Excluir Postagem</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Deseja excluir a postagem?</p>
+                </div>
+                <div class="modal-footer">
+                  <a class="btn btn-secondary" data-dismiss="modal">Fechar</a>
+                  <a href="{% url 'delete_post' post.id %}" class="btn btn-primary">Excluir</a>
+                </div>
+              </div>
+            </div>
+          </div>
     {% endif %}
 {% endfor %}
-
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        Deseja excluir o post?
-      </div>
-
-      <div>
-          <button>Não</button>
-          <button>Sim</button>
-      </div>
-    </div>
-</div>
