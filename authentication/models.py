@@ -1,17 +1,27 @@
 from django.db import models
 import secrets
-import django.contrib.auth.models as adminModels
-# from profile.models import Invite
+from django.core import validators
+from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
 
-class User(adminModels.User):
-  # USER_STATUS_CHOICES = (
-  #   (0,'inactive'),
-  #   (1,'active'),
-  # )
+class User(AbstractBaseUser, PermissionsMixin):
+  username = models.CharField( max_length=30, unique=True, help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma' )
+  first_name = models.CharField(max_length=120, blank=False, null=True)
+  last_name = models.CharField(max_length=120, blank=False, null=True)
+  is_staff = models.BooleanField('Equipe', default=False)
+  email = models.EmailField('E-mail', unique=True)
   bio = models.CharField(max_length=180, blank=True)
   email_verified = models.DateField(null=True, blank=True, auto_now=False, auto_now_add=False)
   verification_code=models.CharField(max_length=128,blank=False, db_index=True, unique=True)
   friendship = models.ManyToManyField('User')
+
+  USERNAME_FIELD = 'username'
+  REQUIRED_FIELDS = ['email']
+
+  objects = UserManager()
+
+  @property
+  def full_name(self):
+    return "%s %s" % (self.first_name, self.last_name )
 
   def save(self, *args, **kwargs):
     token = secrets.token_hex(20)
@@ -21,5 +31,5 @@ class User(adminModels.User):
     super(User, self).save(*args, **kwargs)
     
   def send_invite(self, recipient):
-    user.invite.add(recipient=recipient)
+    self.invite.add(recipient=recipient)
     
