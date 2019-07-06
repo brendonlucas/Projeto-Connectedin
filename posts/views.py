@@ -22,7 +22,7 @@ def add_post(request):
 
 @login_required
 def delete_post(request, post_id):
-    post = Post.objects.get(id=post_id, user=request.user)
+    post = Post.objects.get(id=post_id)
     post.delete()
 
     return redirect('index')

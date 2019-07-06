@@ -6,5 +6,7 @@
         <img src="{{ post.image.url }}" style="max-width: 100%">
     {% endif %}
 
+    {% if request.user == post.user %}
     <a href="{% url 'delete_post' post.id %}">Delete</a>
+    {% endif %}
 {% endfor %}
