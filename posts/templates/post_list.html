@@ -1,0 +1,10 @@
+
+{% for post in posts %}
+    {{ post.content }}
+    
+    {% if post.image %}
+        <img src="{{ post.image.url }}" style="max-width: 100%">
+    {% endif %}
+
+    <a href="{% url 'delete_post' post.id %}">Delete</a>
+{% endfor %}
