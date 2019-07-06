@@ -4,7 +4,8 @@ from django.shortcuts import redirect
 from authentication.models import User
 
 def index(request):
-    src = {'current_user': current_user(request) }
+    profiles = User.objects.all()
+    src = {'current_user': current_user(request), 'profiles': profiles }
     return render(request, 'index.html', src )
 
 
