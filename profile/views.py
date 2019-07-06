@@ -8,7 +8,7 @@ from posts.models import Post
 
 def index(request):
     profiles = User.objects.all()
-    posts = Post.objects.filter(user=request.user)
+    posts = Post.objects.filter(user=current_user(request))
     src = {'current_user': current_user(request), 'profiles': profiles, 'form':  PostForm(), 'posts': posts }
     return render(request, 'index.html', src )
 
