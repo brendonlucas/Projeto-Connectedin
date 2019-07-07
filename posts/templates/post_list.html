@@ -1,10 +1,13 @@
 
 {% for post in posts %}
-    {{ post.content }}
+    <p>Publicado em {{ post.pub_date }}</p>
+    <p>{{ post.content }}</p>
     
-    {% if post.image %}
-        <img src="{{ post.image.url }}" style="max-width: 100%">
-    {% endif %}
+    <p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" style="max-width: 100%">
+        {% endif %}
+    </p>
 
     {% if current_user == post.user %}
         <button data-toggle="modal" data-target="#modal-delete-post">Delete</button>

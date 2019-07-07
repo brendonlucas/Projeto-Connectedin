@@ -15,6 +15,8 @@ def add_post(request):
             Post.objects.create(image=data_form['image'], content=data_form['content'], user=request.user)
 
             return redirect('index')
+        else:
+            return redirect('index')               
 
     else:
         return redirect('index')
