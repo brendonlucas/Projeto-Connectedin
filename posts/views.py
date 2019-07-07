@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
-
 
 @login_required
 def add_post(request):
