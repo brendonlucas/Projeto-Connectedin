@@ -1,6 +1,6 @@
 # Connected In
 
-Rede social criada de projeto final da disciplina _Programação para Internet_ ministrada pelo professor Me. Ely da Silva Miranda no curso de Análise e Desenvolvimento de Sistemas no Instituto Federal do Piauí, campus Teresina Central.
+Rede social criada de projeto final da disciplina de _Programação para Internet_, ministrada pelo professor Me. Ely da Silva Miranda no curso de Análise e Desenvolvimento de Sistemas no Instituto Federal do Piauí, campus Teresina Central.
 
 ## Resumo
 
