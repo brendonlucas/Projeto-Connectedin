@@ -4,6 +4,7 @@
   <div class="container">
       <div class="media">
           <div class="media-body">
+
               <span class="username">
                   <a href="{% url 'show_user' profile.id %}">{{ profile.username }}</a></span>
               <p class="mt-3 full_name">
@@ -11,6 +12,7 @@
               </p>
               <div class="btn-group">
                   <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >Invite Profile</a>
+                  <a class="btn btn-light" href="{% url 'change_pass' %}" >Trocar Senha</a>
                 </div>
           </div>
         </div>

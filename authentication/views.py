@@ -42,6 +42,7 @@ class LoginUserView(djangoAuthViews.LoginView):
     form = AuthenticationForm()
 
     def get(self, request):
+        form = AuthenticationForm()
         return render(request, self.template_name, {'form': form})
     
     def post(self, request):

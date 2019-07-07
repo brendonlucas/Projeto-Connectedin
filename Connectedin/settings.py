@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'authentication',
     'widget_tweaks',
     'posts'
+    'recovery_pass',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'Connectedin.urls'
 
 AUTH_USER_MODEL = 'authentication.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -125,3 +127,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'projectconnectedin@gmail.com'
+EMAIL_HOST_PASSWORD = 'connectedin2019'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
