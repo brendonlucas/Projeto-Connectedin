@@ -2,10 +2,14 @@ from django.shortcuts import render
 from profile.models import Invite
 from django.shortcuts import redirect
 from authentication.models import User
+from posts.forms import PostForm
+from posts.models import Post
+
 
 def index(request):
     profiles = User.objects.all()
-    src = {'current_user': current_user(request), 'profiles': profiles }
+    posts = Post.objects.filter(user=current_user(request))
+    src = {'current_user': current_user(request), 'profiles': profiles, 'form':  PostForm(), 'posts': posts }
     return render(request, 'index.html', src )
 
 
