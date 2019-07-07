@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'profile',
     'authentication',
     'widget_tweaks',
-    'posts'
+    'posts',
     'recovery_pass',
 ]
 
