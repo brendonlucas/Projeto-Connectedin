@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-6 offset-3" >
+        {% if users %}
+        <h4> Resultados </h4>
+            {% for user in users %}
+                <ul class="list-group" >
+                    <li class="list-group-item"><a href="{% url 'show_user' user.id %}">{{ user.full_name }} </a>
+                        <div class="btn-group btn-group float-right" >
+                            <a href="#" class="btn-primary btn-sm">Convidar</a>
+                            <a href="#" class="btn-danger btn-sm">Bloquear</a>
+                        </div>
+                    </li>
+                </ul>
+             {% endfor %}
+        {% else %}
+            <p> Não foi possivel encontrar o usuario solicitado :(</p>
+        {% endif %}
+    </div>
+</div>
+</div>
+{% endblock %}
