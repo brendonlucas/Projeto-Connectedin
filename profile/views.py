@@ -4,18 +4,20 @@ from profile.forms import FindUserForm
 from profile.models import Invite
 from django.shortcuts import redirect
 from authentication.models import User
-from posts.forms import PostForm
+from posts.forms import PostForm, CommentForm
 from posts.models import Post
 from django.core.paginator import Paginator
 
 
 def index(request):
     profiles = User.objects.all()
-    posts = Post.objects.filter(user=current_user(request))
+    posts = Post.objects.filter(user=current_user(request), type_post='0')
     paginador = Paginator(posts, 10)
     page = request.GET.get('page')
+    
     posts = paginador.get_page(page)
-    src = {'current_user': current_user(request), 'profiles': profiles, 'form': PostForm(), 'posts': posts}
+
+    src = {'current_user': current_user(request), 'profiles': profiles, 'form': PostForm(), 'comment_form' : CommentForm(), 'posts': posts}
 
     return render(request, 'index.html', src)
 

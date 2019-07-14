@@ -21,3 +21,18 @@ class PostForm(forms.Form):
         errors = self._errors.setdefault(forms.forms.NON_FIELD_ERRORS, forms.utils.ErrorList())
         errors.append(message)
         
+class CommentForm(forms.Form):
+    content = forms.CharField(widget=forms.Textarea, required=False)
+
+    def is_valid(self):
+        valid = super(CommentForm, self).is_valid()
+        content = self.cleaned_data.get('content')
+
+        if content == '':
+            self.add_error('Seu comentário precisa de um conteúdo')
+        
+        return valid
+
+    def add_error(self, message):
+        errors = self._errors.setdefault(forms.forms.NON_FIELD_ERRORS, forms.utils.ErrorList())
+        errors.append(message)

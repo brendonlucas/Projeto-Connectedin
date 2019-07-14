@@ -13,6 +13,13 @@ class Post(models.Model):
     reactions = models.IntegerField(default=0)
     type_post = models.CharField(max_length=1, choices=TYPE_POST, default='0')
     pub_date = models.DateTimeField(auto_now_add=True)
+    commented_post = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+
+    @property
+    def get_comments(self):
+        comments = Post.objects.filter(type_post='1', commented_post=self.commented_post)
+
+        return comments
         
     class Meta:
         ordering = ['-pub_date']
