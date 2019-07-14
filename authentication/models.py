@@ -9,6 +9,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                 help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma')
     first_name = models.CharField(max_length=120, blank=False, null=True)
     last_name = models.CharField(max_length=120, blank=False, null=True)
+    photo = models.ImageField(upload_to='avatar', default='avatar/default_avatar.png')
     is_staff = models.BooleanField('Equipe', default=False)
     email = models.EmailField('E-mail', unique=True)
     bio = models.CharField(max_length=180, blank=True)
