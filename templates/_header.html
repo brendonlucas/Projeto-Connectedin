@@ -18,7 +18,8 @@
         <button  type="submit" class="btn btn-primary btn-sm" >&hookrightarrow;</button >
       </div>
     </form>
-    <a href="{% url 'show_user' current_user.id %}">Hello, {{ current_user.username }}! </a>
+    
+    <a href="{% url 'show_user' current_user.id %}"><img src="{{ current_user.photo.url }}" style="max-width: 10%"> Hello, {{ current_user.username }}! </a>
     <form action={% url 'logout' %}>
        <button class="btn btn-link" type="submit">Logout</button>
     </form>
