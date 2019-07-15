@@ -17,7 +17,7 @@ class Post(models.Model):
 
     @property
     def get_comments(self):
-        comments = Post.objects.filter(type_post='1', commented_post=self.commented_post)
+        comments = Post.objects.filter(type_post='1', commented_post=self)
 
         return comments
         
