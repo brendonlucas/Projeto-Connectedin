@@ -10,8 +10,17 @@
                 <ul class="list-group" >
                     <li class="list-group-item"><a href="{% url 'show_user' user.id %}">{{ user.full_name }} </a>
                         <div class="btn-group btn-group float-right" >
-                            <a href="#" class="btn-primary btn-sm">Convidar</a>
-                            <a href="#" class="btn-danger btn-sm">Bloquear</a>
+                            <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Convidar</a>
+                                    <a class="dropdown-item" href="#">Bloquear</a>
+                                    {% if user.is_superuser %}
+                                        <a class="dropdown-item" href="{% url 'set_admin' user.id %}">Retirar dos Administradores</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'set_admin' user.id %}">Tornar Administrador</a>
+                                    {% endif %}
+                                </div>
                         </div>
                     </li>
                 </ul>

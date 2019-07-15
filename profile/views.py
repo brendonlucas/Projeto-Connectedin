@@ -14,10 +14,11 @@ def index(request):
     posts = Post.objects.filter(user=current_user(request), type_post='0')
     paginador = Paginator(posts, 10)
     page = request.GET.get('page')
-    
+
     posts = paginador.get_page(page)
 
-    src = {'current_user': current_user(request), 'profiles': profiles, 'form': PostForm(), 'comment_form' : CommentForm(), 'posts': posts}
+    src = {'current_user': current_user(request), 'profiles': profiles, 'form': PostForm(),
+           'comment_form': CommentForm(), 'posts': posts}
 
     return render(request, 'index.html', src)
 
@@ -69,11 +70,26 @@ def current_user(request):
     return request.user
 
 
+def set_admin(request, profile_id):
+    profile = User.objects.get(id=profile_id)
+    if profile.is_superuser:
+        profile.is_superuser = False
+        profile.save()
+    else:
+        profile.is_superuser = True
+        profile.save()
+    return redirect('show_user', profile_id)
+
+
 def find_user(request):
     if request.method == 'POST':
         form = FindUserForm(request.POST)
         dados = form.data
         name = dados['name_user']
-        print(name)
         users = User.objects.filter(first_name=name)
         return render(request, 'find_user.html', {'users': users, 'current_user': current_user(request)})
+
+
+def find_user_in_link(request, username):
+    users = User.objects.filter(first_name=username)
+    return render(request, 'find_user.html', {'users': users, 'current_user': current_user(request)})

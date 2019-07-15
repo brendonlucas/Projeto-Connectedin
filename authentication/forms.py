@@ -13,15 +13,15 @@ class UserRegisterForm(forms.Form):
     def is_valid(self):
         valid = True
         if not super(UserRegisterForm, self).is_valid():
-            self.add_error('Por favor, verifique os dados informados')
+            self.add_erro('Por favor, verifique os dados informados')
             valid = False
 
         user_exists = User.objects.filter(username=self.cleaned_data['username']).exists()
         if user_exists:
-            self.add_error('Usuário já existente.')
+            self.add_erro('Usuário já existente.')
             valid = False
         return valid
 
-    def add_error(self, message):
+    def add_erro(self, message):
         errors = self._errors.setdefault(forms.forms.NON_FIELD_ERRORS, forms.utils.ErrorList())
         errors.append(message)

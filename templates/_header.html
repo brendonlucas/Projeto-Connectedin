@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
     {% if current_user.is_authenticated %}
@@ -18,8 +18,11 @@
         <button  type="submit" class="btn btn-primary btn-sm" >&hookrightarrow;</button >
       </div>
     </form>
-    
+    {% if current_user.photo.url != null %}
     <a href="{% url 'show_user' current_user.id %}"><img src="{{ current_user.photo.url }}" style="max-width: 10%"> Hello, {{ current_user.username }}! </a>
+    {% else %}
+        <a href="{% url 'show_user' current_user.id %}"><img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" style="max-width: 10%"> Hello, {{ current_user.username }}! </a>
+    {% endif %}
     <form action={% url 'logout' %}>
        <button class="btn btn-link" type="submit">Logout</button>
     </form>
