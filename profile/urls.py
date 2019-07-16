@@ -1,5 +1,5 @@
 from django.urls import path
-from profile.views import show, invite_friendship, accept_friendship, refuse_friendship, find_user, set_admin ,find_user_in_link
+from profile.views import *
 
 urlpatterns = [
   path('<int:profile_id>', show, name='show_user'),
@@ -9,4 +9,5 @@ urlpatterns = [
   path('find/', find_user, name='find_user'),
   path('find/<str:username>', find_user_in_link, name='find_user_link'),
   path('set-admin/<int:profile_id>', set_admin, name='set_admin'),
+  path('page-admin', page_admin, name='page_admin'),
 ]

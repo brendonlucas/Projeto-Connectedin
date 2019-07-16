@@ -11,17 +11,24 @@
       </li>
     </ul>
     {% if current_user.is_authenticated %}
-    <form class="form-inline" style="margin-right:10px" method="post" action="{% url 'find_user' %}">
+      <form class="form-inline" style="margin-right:10px" method="post" action="{% url 'find_user' %}">
       {% csrf_token %}
       <div class="form-group mx-sm-3 mb-2">
         <input type="text" class="form-control form-control-sm" id="id_find_user" name="name_user" placeholder="Procurar" required>
         <button  type="submit" class="btn btn-primary btn-sm" >&hookrightarrow;</button >
       </div>
     </form>
+
     {% if current_user.photo.url != null %}
-    <a href="{% url 'show_user' current_user.id %}"><img src="{{ current_user.photo.url }}" style="max-width: 10%"> Hello, {{ current_user.username }}! </a>
+        <img src="{{ current_user.photo.url }}" style="max-width: 4%"> <a href="{% url 'show_user' current_user.id %}"> Hello, {{ current_user.username }}! </a>
     {% else %}
-        <a href="{% url 'show_user' current_user.id %}"><img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" style="max-width: 10%"> Hello, {{ current_user.username }}! </a>
+       <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" style="max-width: 4%"> <a href="{% url 'show_user' current_user.id %}"> Hello, {{ current_user.username }}! </a>
+    {% endif %}
+
+    {% if current_user.is_superuser %}
+      <a style="margin:5px" href="{% url 'index' %}">TimeLine</a>
+      <a style="margin:5px" href="{% url 'page_admin' %}">Page Admin</a>
+      <a style="margin:5px" href="{% url 'show_reports' %}">Denuncias</a>
     {% endif %}
     <form action={% url 'logout' %}>
        <button class="btn btn-link" type="submit">Logout</button>

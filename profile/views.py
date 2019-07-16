@@ -16,7 +16,6 @@ def index(request):
     posts = Post.objects.filter(user=current_user(request), type_post='0')
     paginador = Paginator(posts, 10)
     page = request.GET.get('page')
-
     posts = paginador.get_page(page)
 
     src = {'current_user': current_user(request), 'profiles': profiles, 'form': PostForm(),
@@ -98,3 +97,11 @@ def find_user(request):
 def find_user_in_link(request, username):
     users = User.objects.filter(first_name=username)
     return render(request, 'find_user.html', {'users': users, 'current_user': current_user(request)})
+
+
+@login_required
+def page_admin(request):
+    if current_user(request).is_superuser:
+        return render(request, 'pag_superuser.html', {'current_user': current_user(request), 'profiles': User.objects.all()})
+    else:
+        return render(request, 'access_denied.html', {'current_user': current_user(request)})

@@ -8,8 +8,17 @@
         <h4> Resultados </h4>
             {% for user in users %}
                 <ul class="list-group" >
-                    <li class="list-group-item"><a href="{% url 'show_user' user.id %}">{{ user.full_name }} </a>
+
+                    <li class="list-group-item" style="background-color:#f3f3fb;">
+                        {% if current_user.photo.url != null %}
+                            <img style="width:40px; height:40px; border-radius:50%; margin:5px" src="{{user.photo.url}}" alt="profile_image">
+                        {% else %}
+                            <img style="width:40px; height:40px; border-radius:50%; margin:5px" src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" alt="profile_image">
+                        {% endif %}
+                        <a href="{% url 'show_user' user.id %}">{{ user.full_name }} </a>
+
                         <div class="btn-group btn-group float-right" >
+                            {% if current_user.id != user.id %}
                             <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -23,9 +32,11 @@
                                         {% endif %}
                                     {% endif %}
                                 </div>
+                            {% endif %}
                         </div>
                     </li>
                 </ul>
+                <br>
              {% endfor %}
         {% else %}
             <p> Não foi possivel encontrar o usuario solicitado :(</p>
