@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+
+    <div class="" style="margin-left: auto; margin-right: auto;">
+        {% if reports %}
+            {% for report in reports %}
+                {% if report.amount > 0%}
+                <div style="border-radius:5px; max-width:500px ;margin-left: auto; margin-right: auto; background-color:#f3f3f3; padding:6px;">
+                <p>Publicado em {{ report.post.pub_date }}</p>
+                <p>{{ report.post.content }}</p>
+
+                <p>
+                    {% if report.post.image %}
+                        <img src="{{ report.post.image.url }}" style="max-width: 100%">
+                    {% endif %}
+                </p>
+                <a href="{% url 'delete_post_reported' report.post.id %}" class="btn btn-danger btn-sm">Deletar Postagem</a>
+                <a href="{% url 'delete_report' report.id %}" class="btn btn-danger btn-sm">Rejeitar</a>
+                <a href="{% url 'show_comments_report' report.id %}" class="btn btn-primary btn-sm">Denuncias</a>
+                <p style="float:right"> Total: {{ report.amount }}</p>
+            </div>
+            <br>
+        {% endif %}
+            {% endfor %}
+        {% else %}
+            <div style="max-width:500px ;margin-left: auto; margin-right: auto; background-color:pink; padding:6px;">
+                <h5> Esta tudo Tranquilo :) </h5>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

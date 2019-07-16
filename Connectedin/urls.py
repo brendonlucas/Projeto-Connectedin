@@ -16,4 +16,5 @@ urlpatterns = [
     path('', include(profileUrls)),
     path('posts/', include(postUrls)),
     path('', include('recovery_pass.urls')),
+    path('', include('report_post.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="" style="margin-left: auto; margin-right: auto;">
+            {% for report in reports %}
+                <div style="border-radius:5px; max-width:500px;margin-left: auto; margin-right: auto; background-color:#f3f3f3; padding:6px;">
+                <p style="opacity:0.8; font-size: 15px" >Reportado em {{ report.date_report }}</p>
+                    <p> <b>Descrição:</b> {{ report.comment }}</p>
+            </div>
+            <br>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}

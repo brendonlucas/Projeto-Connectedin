@@ -20,6 +20,11 @@ class UserRegisterForm(forms.Form):
         if user_exists:
             self.add_erro('Usuário já existente.')
             valid = False
+
+        email_exists = User.objects.filter(email=self.cleaned_data['email']).exists()
+        if email_exists:
+            self.add_erro('Email já cadastrado.')
+            valid = False
         return valid
 
     def add_erro(self, message):

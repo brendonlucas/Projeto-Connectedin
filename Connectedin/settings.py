@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'posts',
     'recovery_pass',
+    'report_post',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/signin/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
 

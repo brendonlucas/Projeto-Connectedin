@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+
+    <div class="row" style="margin-left: auto; margin-right: auto;">
+        <div style="max-width:500px">
+            <p>Publicado em {{ post.pub_date }}</p>
+            <p>{{ post.content }}</p>
+
+            <p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" style="max-width: 100%">
+                {% endif %}
+            </p>
+        </div>
+
+        <form class="form" style="margin-left: auto; margin-right: auto; padding:10px" method="post" action=".">
+            {% csrf_token %}
+            <h6> Comentario sobre a denúncia: </h6>
+            <textarea style="width:400px; min-height:120px; max-height:120px" name="comment"></textarea><br>
+            <button type="submit" class="btn-primary btn-sm" value="enviar">Enviar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

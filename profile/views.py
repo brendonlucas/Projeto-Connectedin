@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from profile.forms import FindUserForm
@@ -9,6 +10,7 @@ from posts.models import Post
 from django.core.paginator import Paginator
 
 
+@login_required
 def index(request):
     profiles = User.objects.all()
     posts = Post.objects.filter(user=current_user(request), type_post='0')
@@ -70,6 +72,7 @@ def current_user(request):
     return request.user
 
 
+@login_required
 def set_admin(request, profile_id):
     profile = User.objects.get(id=profile_id)
     if profile.is_superuser:
@@ -81,6 +84,7 @@ def set_admin(request, profile_id):
     return redirect('show_user', profile_id)
 
 
+@login_required
 def find_user(request):
     if request.method == 'POST':
         form = FindUserForm(request.POST)
@@ -90,6 +94,7 @@ def find_user(request):
         return render(request, 'find_user.html', {'users': users, 'current_user': current_user(request)})
 
 
+@login_required
 def find_user_in_link(request, username):
     users = User.objects.filter(first_name=username)
     return render(request, 'find_user.html', {'users': users, 'current_user': current_user(request)})
