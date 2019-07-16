@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -30,7 +30,7 @@ def delete_post(request, post_id):
 @login_required
 def comment_post(request, post_id):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = CommentForm(request.POST)
         post = Post.objects.get(id=post_id)
         
         if form.is_valid():
