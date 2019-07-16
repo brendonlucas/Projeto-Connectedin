@@ -8,9 +8,8 @@
         <h4> Resultados </h4>
             {% for user in users %}
                 <ul class="list-group" >
-
                     <li class="list-group-item" style="background-color:#f3f3fb;">
-                        {% if current_user.photo.url != null %}
+                        {% if user.photo.url != null %}
                             <img style="width:40px; height:40px; border-radius:50%; margin:5px" src="{{user.photo.url}}" alt="profile_image">
                         {% else %}
                             <img style="width:40px; height:40px; border-radius:50%; margin:5px" src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" alt="profile_image">
@@ -38,6 +37,29 @@
                 </ul>
                 <br>
              {% endfor %}
+            {% if users.paginator.count > 10 %}
+            <ul class="pagination" style="margin-left:50%">
+                {% if users.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1">Anterior</a>
+                </li>
+                {% endif %}
+                {% for num in users.paginator.page_range %}
+                {% if users.number == num %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+                </li>
+                {% elif num > users.number|add:'-3' and num < users.number|add:3 %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if users.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ users.next_page_number }}">Próximo</a>
+                </li>
+                {% endif %}
+            </ul>
+                {% endif %}
         {% else %}
             <p> Não foi possivel encontrar o usuario solicitado :(</p>
         {% endif %}

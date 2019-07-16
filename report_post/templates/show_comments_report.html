@@ -2,13 +2,36 @@
 {% block body %}
 <div class="container">
     <div class="" style="margin-left: auto; margin-right: auto;">
-            {% for report in reports %}
-                <div style="border-radius:5px; max-width:500px;margin-left: auto; margin-right: auto; background-color:#f3f3f3; padding:6px;">
-                <p style="opacity:0.8; font-size: 15px" >Reportado em {{ report.date_report }}</p>
-                    <p> <b>Descrição:</b> {{ report.comment }}</p>
-            </div>
-            <br>
+        {% for report in reports %}
+        <div style="border-radius:5px; max-width:500px;margin-left: auto; margin-right: auto; background-color:#f3f3f3; padding:6px;">
+            <p style="opacity:0.8; font-size: 15px" >Reportado em {{ report.date_report }}</p>
+            <p> <b>Descrição:</b> {{ report.comment }}</p>
+        </div>
+        <br>
+        {% endfor %}
+        {% if reports.paginator.count > 10 %}
+        <ul class="pagination" style="margin-left:50%">
+            {% if reports.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ reports.previous_page_number }}" tabindex="-1">Anterior</a>
+            </li>
+            {% endif %}
+            {% for num in reports.paginator.page_range %}
+            {% if reports.number == num %}
+            <li class="page-item active">
+                <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+            </li>
+            {% elif num > reports.number|add:'-3' and num < reports.number|add:3 %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
             {% endfor %}
+            {% if reports.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ reports.next_page_number }}">Próximo</a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

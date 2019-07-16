@@ -12,6 +12,7 @@
 </style>
 
 {% for post in posts %}
+<div style="padding:5px; background-color:#f3f3fb; border-radius:5px">
     <p>Publicado em {{ post.pub_date }}</p>
     <p>{{ post.content }}</p>
     
@@ -68,7 +69,8 @@
       <p>{{ comment.content }}</p>
       <p>{{ comment.pub_date }}</p>
     {% endfor %}
-
+</div>
+    <br>
 {% endfor %}
 
 {% if posts.paginator.count > 10 %}

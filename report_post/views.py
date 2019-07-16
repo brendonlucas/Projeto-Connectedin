@@ -1,5 +1,6 @@
 from datetime import date
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from posts.models import Post
 from report_post.forms import FormReportPost
@@ -44,7 +45,10 @@ def get_current_user(request):
 @login_required
 def show_reports(request):
     if get_current_user(request).is_superuser:
-        reports = Report.objects.all().order_by('-id')
+        reports = Report.objects.exclude(amount=0).order_by('-id')
+        paginador = Paginator(reports, 10)
+        page = request.GET.get('page')
+        reports = paginador.get_page(page)
         return render(request, 'show_reports.html', {'current_user': get_current_user(request), 'reports': reports})
     else:
         return render(request, 'access_denied.html', {'current_user': get_current_user(request)})
@@ -77,6 +81,9 @@ def show_comments_report(request, report_id):
     if get_current_user(request).is_superuser:
         report = Report.objects.get(id=report_id)
         reports_comments = Report.objects.filter(post_id=report.post.id)
+        paginador = Paginator(reports_comments, 10)
+        page = request.GET.get('page')
+        reports_comments = paginador.get_page(page)
         return render(request, 'show_comments_report.html',
                       {'current_user': get_current_user(request), 'reports': reports_comments})
     else:

@@ -18,9 +18,12 @@
                 </p>
               <br>
               <div class="btn-group">
-                  <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >Invite Profile</a>
-                  <a class="btn btn-light" href="#" >Bloquear</a>
-                  <a class="btn btn-light" href="{% url 'change_pass' %}" >Trocar Senha</a>
+                  {% if profile.id != current_user.id %}
+                      <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >Invite Profile</a>
+                      <a class="btn btn-light" href="#" >Bloquear</a>
+                  {% else %}
+                    <a class="btn btn-light" href="{% url 'change_pass' %}" >Trocar Senha</a>
+                  {% endif %}
               </div>
           </div>
       </div>

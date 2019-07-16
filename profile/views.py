@@ -89,19 +89,27 @@ def find_user(request):
         form = FindUserForm(request.POST)
         dados = form.data
         name = dados['name_user']
-        users = User.objects.filter(first_name=name)
-        return render(request, 'find_user.html', {'users': users, 'current_user': current_user(request)})
+        return redirect('find_user_link', name)
+    else:
+        return render(request, 'find_user.html', {'users': None, 'current_user': current_user(request)})
 
 
 @login_required
 def find_user_in_link(request, username):
     users = User.objects.filter(first_name=username)
+    paginador = Paginator(users, 10)
+    page = request.GET.get('page')
+    users = paginador.get_page(page)
     return render(request, 'find_user.html', {'users': users, 'current_user': current_user(request)})
 
 
 @login_required
 def page_admin(request):
     if current_user(request).is_superuser:
-        return render(request, 'pag_superuser.html', {'current_user': current_user(request), 'profiles': User.objects.all()})
+        users = User.objects.all()
+        paginador = Paginator(users, 10)
+        page = request.GET.get('page')
+        users = paginador.get_page(page)
+        return render(request, 'pag_superuser.html', {'current_user': current_user(request), 'profiles': users})
     else:
         return render(request, 'access_denied.html', {'current_user': current_user(request)})

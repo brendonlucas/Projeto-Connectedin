@@ -9,24 +9,8 @@
                     {{notice.content}}
                 </p>
             {% endif %}
-            {% for profile in profiles %}
-                    <div class="media">
-                        <div class="media-body">
-                            <span class="preview-username">
-                                    <a href="{% url 'show_user' profile.id %}">
-                                            {{ profile.username }}
-                                    </a>
-                            </span>
-                            <h4 class="mt-1">
-                                    <a href="{% url 'show_user' profile.id %}">
-                                            {{ profile.full_name }}
-                                    </a>
-                            </h4>
-                        </div>
-                    </div>
-            {% endfor %}
-
             {% include 'add_post.html' %}
+            <br>
             {% include 'post_list.html' with posts=posts %}
         </div>
         <div class="col col-sm-3">Lado</div>
