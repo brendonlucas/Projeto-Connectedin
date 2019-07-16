@@ -20,9 +20,9 @@
     </form>
 
     {% if current_user.photo.url != null %}
-        <img src="{{ current_user.photo.url }}" style="max-width: 4%"> <a href="{% url 'show_user' current_user.id %}"> Hello, {{ current_user.username }}! </a>
+      <a href="{% url 'show_user' current_user.id %}"> <img src="{{ current_user.photo.url }}" style="max-width: 4%"> Hello, {{ current_user.username }}! </a>
     {% else %}
-       <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" style="max-width: 4%"> <a href="{% url 'show_user' current_user.id %}"> Hello, {{ current_user.username }}! </a>
+      <a href="{% url 'show_user' current_user.id %}"> <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" style="max-width: 4%"> Hello, {{ current_user.username }}! </a>
     {% endif %}
 
     {% if current_user.is_superuser %}
@@ -30,7 +30,7 @@
       <a style="margin:5px" href="{% url 'page_admin' %}">Page Admin</a>
       <a style="margin:5px" href="{% url 'show_reports' %}">Denuncias</a>
     {% endif %}
-    <form action={% url 'logout' %}>
+    <form action="{% url 'logout' %}">
        <button class="btn btn-link" type="submit">Logout</button>
     </form>
     {% else %}

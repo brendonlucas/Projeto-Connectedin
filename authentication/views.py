@@ -21,11 +21,12 @@ class RegisterUserView(View):
         return render(request, self.template_name, {'form': UserRegisterForm()})
 
     def post(self, request):
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             dados_form = form.cleaned_data
             usuario = User.objects.create_user(username=dados_form['username'], 
-                                                email=dados_form['email'], 
+                                                email=dados_form['email'],
+                                                photo=dados_form['photo'], 
                                                 password=dados_form['password'], 
                                                 first_name=dados_form['first_name'], 
                                                 last_name=dados_form['last_name'])
