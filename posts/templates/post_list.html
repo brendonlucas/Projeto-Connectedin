@@ -1,3 +1,15 @@
+{% load widget_tweaks %}
+<style>
+  #input-form {
+    max-width: 200px;
+    max-height: 50px;
+    margin-top: 20px;
+  }
+
+  #submit-comment{
+    display: none;
+  }
+</style>
 
 {% for post in posts %}
     <p>Publicado em {{ post.pub_date }}</p>
@@ -9,25 +21,8 @@
         {% endif %}        
     </p>
 
-    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-comment-post">Comentar</button>
-    <div class="modal" id="modal-comment-post" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Adicionar Comentário</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>{% include 'comment_form.html' %}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     {% if current_user == post.user %}
-        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete-post">Delete</button>
+        <button onclick="setPostIdDelete({{ post.id }})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete-post">Delete</button>
 
         <div class="modal" id="modal-delete-post" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -43,13 +38,31 @@
                 </div>
                 <div class="modal-footer">
                   <a class="btn btn-secondary" data-dismiss="modal">Fechar</a>
-                  <a href="{% url 'delete_post' post.id %}" class="btn btn-primary">Excluir</a>
+                  <a href="" id="delete-post" class="btn btn-primary">Excluir</a>
                 </div>
               </div>
             </div>
           </div>
     <a class="btn btn-primary btn-sm" href="{% url 'report_post' post.id %}">Denunciar</a>
     {% endif %}
+
+    <form id="comment-form" action="{% url 'comment_post' post.id %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+          
+      {% for field in comment_form %}
+        <div style="margin-top: 10px;" class="form-group">
+          {% render_field field class+="form-control" %}
+        </div>
+        {% endfor%}
+        <button id="submit-comment" class="btn btn-primary" type="submit">Comentar</button>
+          
+        {% if form.errors %}
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+    </form>
 
     {% for comment in post.get_comments %}
       <p>{{ comment.content }}</p>
@@ -83,3 +96,18 @@
       {% endif %}
   </ul>
 {% endif %}
+
+<script type="text/javascript">
+  $(document).ready(function(event) {
+    $('input-comment').keypress(function(event) {
+      if(event.keyCode == 13) {
+        $('#submit-comment').click();
+      }
+    });
+  });
+
+  function setPostIdDelete(postid) {
+    buttonDelete = document.getElementById('delete-post');
+    buttonDelete.setAttribute('href', '/posts/' + postid + '/delete/');
+}
+</script>

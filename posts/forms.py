@@ -22,7 +22,7 @@ class PostForm(forms.Form):
         errors.append(message)
         
 class CommentForm(forms.Form):
-    content = forms.CharField(widget=forms.Textarea, required=False)
+    content = forms.CharField(widget=forms.TextInput(attrs={'id': 'input-comment',}), required=False)
 
     def is_valid(self):
         valid = super(CommentForm, self).is_valid()
