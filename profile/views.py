@@ -25,6 +25,7 @@ def index(request):
     return render(request, 'index.html', src)
 
 
+@login_required
 def show(request, profile_id):
     profile = User.objects.get(id=profile_id)
     try:
@@ -163,9 +164,10 @@ def recusar(request, invite_id):
     return redirect('index')
 
 
-def desfazer(request, perfil_id):
-    perfil = User.objects.get(id=perfil_id)
-    current_user(request).friendship.filter()
-    perfil.desfazer()
+@login_required
+def desfazer(request, profile_id):
+    perfil = User.objects.get(id=profile_id)
+    current_user(request).friendship.remove(perfil)
+    perfil.friendship.remove(current_user(request))
     messages.success(request, "Desfeito amizade")
     return redirect('index')

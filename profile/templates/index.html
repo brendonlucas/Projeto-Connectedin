@@ -10,11 +10,11 @@
                 <div>
                     <ul>
                          <li style="display:inline-block; background-color:#f3f3fb ;width:100%; margin-left:-40px;margin-top:5px;padding:5px; border-radius:5px">
-                            <a href="#"> {{ perfil.full_name }} </a>
+                            <a href="{% url 'show_user' perfil.id %}"> {{ perfil.full_name }} </a>
                              <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
                                 <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#" class="dropdown-item">Desfazer</a></li>
+                                    <li><a href="{% url 'remove_friendship' perfil.id %}" class="dropdown-item">Desfazer</a></li>
                                     <li><a href="#" class="dropdown-item">Bloquear</a></li>
                                 </ul>
                             </div>
@@ -46,7 +46,7 @@
             <div >
                 <ul>
                     <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
-                        <a href="#">{{ convite.solicitante.full_name }}</a>
+                        <a href="{% url 'show_user' convite.solicitante.id %}">{{ convite.solicitante.full_name }}</a>
                         <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
                             <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
                             <ul class="dropdown-menu" role="menu">
@@ -72,7 +72,7 @@
                         <div>
                             <ul>
                             <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
-                                    <a href="#"> {{ convite.convidado.full_name }} </a>
+                                    <a href="{% url 'show_user' convite.convidado.id %}"> {{ convite.convidado.full_name }} </a>
                                         <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
                                             <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
                                                 <ul class="dropdown-menu" role="menu" style="background-color: white">

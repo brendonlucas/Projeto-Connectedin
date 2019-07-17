@@ -21,7 +21,11 @@
                             <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Convidar</a>
+                                    {% if user in current_user.friendship.all %}
+                                        <a class="dropdown-item" href="{% url 'remove_friendship' user.id %}">Desfazer</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'invite_friendship' user.id %}">Convidar</a>
+                                    {% endif %}
                                     <a class="dropdown-item" href="#">Bloquear</a>
                                     {% if current_user.is_superuser %}
                                         {% if user.is_superuser %}
