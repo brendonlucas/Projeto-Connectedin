@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">ConnectedIn</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,7 +9,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">({% trans "atual" %})</span></a>
       </li>
     </ul>
     {% if current_user.is_authenticated %}
@@ -21,19 +23,19 @@
 
     {% if current_user.photo.url != null %}
       <img src="{{ current_user.photo.url }}" style="max-width: 4%"> 
-      <a href="{% url 'show_user' current_user.id %}"> Hello, {{ current_user.username }}! </a>
+      <a href="{% url 'show_user' current_user.id %}"> {% trans "Olá" %}, {{ current_user.username }}! </a>
     {% else %}
       <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" style="max-width: 4%">
-      <a href="{% url 'show_user' current_user.id %}">  Hello, {{ current_user.username }}! </a>
+      <a href="{% url 'show_user' current_user.id %}">  {% trans "Olá" %}, {{ current_user.username }}! </a>
     {% endif %}
 
     {% if current_user.is_superuser %}
       <a style="margin:5px" href="{% url 'index' %}">TimeLine</a>
-      <a style="margin:5px" href="{% url 'page_admin' %}">Page Admin</a>
-      <a style="margin:5px" href="{% url 'show_reports' %}">Denuncias</a>
+      <a style="margin:5px" href="{% url 'page_admin' %}">{% trans "Página do Admin" %}</a>
+      <a style="margin:5px" href="{% url 'show_reports' %}">{% trans "Denúncias" %}</a>
     {% endif %}
     <form action="{% url 'logout' %}">
-       <button class="btn btn-link" type="submit">Logout</button>
+       <button class="btn btn-link" type="submit">{% trans "Sair" %}</button>
     </form>
     {% else %}
     <div class="btn-group">

@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block body %}
+{% load i18n %}
+
 <div class="container">
     <div class="row">
         <div class="col col-sm-3">
             Lado
         </div>
         <div class="col col-sm-6">
-            <h4>Todos os Usuario:</h4>
+            <h4>{% trans "Todos os Usuarios:" %}</h4>
             {% if notice %}
             <p class="alert alert-{{notice.type}}">
-                {{notice.content}}
+                {{ notice.content }}
             </p>
             {% endif %}
             {% for profile in profiles %}
@@ -30,15 +32,15 @@
                 </div>
                 {% if current_user.id != profile.id %}
                     <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções</a>
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans "Opções" %}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Convidar</a>
-                            <a class="dropdown-item" href="#">Bloquear</a>
+                        <a class="dropdown-item" href="#">{% trans "Convidar" %}</a>
+                            <a class="dropdown-item" href="#">{% trans "Bloquear" %}</a>
                             {% if current_user.is_superuser %}
                                 {% if profile.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">Retirar dos Administradores</a>
+                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">{% trans "Retirar dos Administradores" %}</a>
                                 {% else %}
-                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">Tornar Administrador</a>
+                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">{% trans "Tornar Administrador" %}</a>
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -50,7 +52,7 @@
             <ul class="pagination" style="margin-left:50%">
                 {% if profiles.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ profiles.previous_page_number }}" tabindex="-1">Anterior</a>
+                    <a class="page-link" href="?page={{ profiles.previous_page_number }}" tabindex="-1">{% trans "Anterior" %}</a>
                 </li>
                 {% endif %}
                 {% for num in profiles.paginator.page_range %}
@@ -64,7 +66,7 @@
                 {% endfor %}
                 {% if profiles.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ profiles.next_page_number }}">Próximo</a>
+                    <a class="page-link" href="?page={{ profiles.next_page_number }}">{% trans "Próximo" %}</a>
                 </li>
                 {% endif %}
             </ul>

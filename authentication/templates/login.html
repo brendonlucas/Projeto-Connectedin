@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block body %}
+{% load i18n %}
+
 <div class="container">
     <div class="row">
         <div class="col col-sm-4 offset-4">
@@ -14,21 +16,21 @@
                 <div class="card-body">
                         <form class="form" method="POST" action="{% url 'signin' %}">
                             {% csrf_token %}
-                            <label for="id_username"> Usuario: </label>
+                            <label for="id_username"> {% trans "Usuario:" %} </label>
                             <input class="form-control" id="id_username" name="username" placeholder="Usuario" required><br>
-                            <label class="name_login2" for="id_password" >Senha: </label>
+                            <label class="name_login2" for="id_password" >{% trans "Senha:" %} </label>
                             <input class="form-control" id="id_password" name="password" type="password" placeholder="Senha" required><br>
                             <div class="btn-group">
-                                <button class="btn-primary btn-sm" type="submit" >Confirmar</button>
-                                <a href="{% url 'signup' %}" class="btn-link btn-sm">Criar uma conta.</a>
+                                <button class="btn-primary btn-sm" type="submit" >{% trans "Confirmar" %}</button>
+                                <a href="{% url 'signup' %}" class="btn-link btn-sm">{% trans "Criar uma conta." %}</a>
                             </div>
-                            <a href="{% url 'send' %}" class="btn-link btn-sm" style="float: right">Esqueci minha senha.</a>
+                            <a href="{% url 'send' %}" class="btn-link btn-sm" style="float: right">{% trans "Esqueci minha senha." %}</a>
                             </form>
 
                 </div>
                 {% if form.errors %}
                 <div style="padding: 5px; background-color: #ff6d70">
-                    <p >Por favor, verifique o Email e/ou Senha informados </p>
+                    <p >{% trans "Por favor, verifique o Email e/ou Senha informados" %} </p>
                 </div>
         {% endif %}
             </div>

@@ -9,6 +9,7 @@ from django.contrib import messages
 from recovery_pass.forms import *
 from datetime import date
 import random
+from django.utils.translation import ugettext_lazy as _
 
 
 def get_current_user(request):
@@ -87,9 +88,9 @@ class SendEmailView(View):
             dados_form = form.cleaned_data
             email_user = dados_form['email']
             link_gerado = gerar_link(email_user)
-            mensagem = 'Link para recuperar senha do connectedin \n' + 'http://127.0.0.1:8000/recuperar-senha/' + \
+            mensagem = _('Link para recuperar senha do connectedin \n') + 'http://127.0.0.1:8000/recuperar-senha/' + \
                        link_gerado
-            send_mail('Email para recuperacao', mensagem, 'projectconnectedin@gmail.com',
+            send_mail(_('Email para recuperacao'), mensagem, 'projectconnectedin@gmail.com',
                       [email_user]
                       , fail_silently=False)
             return redirect('signin')
@@ -113,7 +114,7 @@ def change_password(request):
                 user.save()
                 return redirect('signin')
             else:
-                messages.error(request, 'A Senha informada não confere com sua conta!')
+                messages.error(request, _('A Senha informada não confere com sua conta!'))
                 return redirect('change_pass')
 
     elif request.method == 'GET':

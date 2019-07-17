@@ -1,4 +1,6 @@
 {% load widget_tweaks %}
+{% load i18n %}
+
 <style>
   #input-form {
     max-width: 200px;
@@ -13,7 +15,7 @@
 
 {% for post in posts %}
 <div style="padding:5px; background-color:#f3f3fb; border-radius:5px">
-    <p>Publicado em {{ post.pub_date }}</p>
+    <p>{% trans "Publicado em" %} {{ post.pub_date }}</p>
     <p>{{ post.content }}</p>
     
     <p>
@@ -29,22 +31,22 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Excluir Postagem</h5>
+                  <h5 class="modal-title">{% trans "Excluir Postagem" %}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>Deseja excluir a postagem?</p>
+                  <p>{% trans "Deseja excluir a postagem?" %}</p>
                 </div>
                 <div class="modal-footer">
-                  <a class="btn btn-secondary" data-dismiss="modal">Fechar</a>
-                  <a href="" id="delete-post" class="btn btn-primary">Excluir</a>
+                  <a class="btn btn-secondary" data-dismiss="modal">{% trans "Fechar" %}</a>
+                  <a href="" id="delete-post" class="btn btn-primary">{% trans "Excluir" %}</a>
                 </div>
               </div>
             </div>
           </div>
-    <a class="btn btn-primary btn-sm" href="{% url 'report_post' post.id %}">Denunciar</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'report_post' post.id %}">{% trans "Denunciar" %}</a>
     {% endif %}
 
     <form id="comment-form" action="{% url 'comment_post' post.id %}" method="POST" enctype="multipart/form-data">
@@ -55,7 +57,7 @@
           {% render_field field class+="form-control" %}
         </div>
         {% endfor%}
-        <button id="submit-comment" class="btn btn-primary" type="submit">Comentar</button>
+        <button id="submit-comment" class="btn btn-primary" type="submit">{% trans "Comentar" %}</button>
           
         {% if form.errors %}
           <div class="alert alert-danger">
@@ -77,7 +79,7 @@
   <ul class="pagination">
     {% if posts.has_previous %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ posts.previous_page_number }}" tabindex="-1">Anterior</a>
+        <a class="page-link" href="?page={{ posts.previous_page_number }}" tabindex="-1">{% trans "Anterior" %}</a>
       </li>
     {% endif %}
 
@@ -93,7 +95,7 @@
 
       {% if posts.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ posts.next_page_number }}">Próximo</a>
+          <a class="page-link" href="?page={{ posts.next_page_number }}">{% trans "Próximo" %}</a>
         </li>
       {% endif %}
   </ul>

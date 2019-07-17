@@ -1,5 +1,6 @@
 from django import forms
 from .models import Post
+from django.utils.translation import ugettext_lazy as _
 
 
 class PostForm(forms.Form):
@@ -12,7 +13,7 @@ class PostForm(forms.Form):
         content = self.cleaned_data.get('content')
 
         if image is None and content == '':
-            self.add_error('Seu post precisa de um texto e/ou uma imagem')
+            self.add_error(_('Seu post precisa de um texto ou uma imagem'))
             valid = False
 
         return valid
@@ -29,7 +30,7 @@ class CommentForm(forms.Form):
         content = self.cleaned_data.get('content')
 
         if content == '':
-            self.add_error('Seu comentário precisa de um conteúdo')
+            self.add_error(_('Seu comentário precisa de um conteúdo'))
         
         return valid
 

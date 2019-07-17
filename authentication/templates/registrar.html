@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block body %}
+{% load i18n %}
+
 <div class="container">
     <div class="row">
         <div class="col col-sm-4 offset-4">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Registre-se
+                        {% trans "Registre-se" %}
                     </h4>
                 </div>
                 <div class="card-body">
@@ -20,8 +22,8 @@
                                         </div>
                                     {% endfor%}
                                 <div class="btn-group">
-                                    <button class="btn-primary btn-sm" type="submit" >Confirmar</button>
-                                <a href="{% url 'signin' %}" class="btn-link btn-sm">Já tenho uma conta.</a>
+                                    <button class="btn-primary btn-sm" type="submit" >{% trans "Confirmar" %}</button>
+                                <a href="{% url 'signin' %}" class="btn-link btn-sm">{% trans "Já tenho uma conta." %}</a>
                                 </div>
                             </form>
                 </div>

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
+{% load i18n %}
+
 <div class="page-header">
   <div class="container">
       <div class="media">
@@ -19,10 +21,10 @@
               <br>
               <div class="btn-group">
                   {% if profile.id != current_user.id %}
-                      <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >Invite Profile</a>
-                      <a class="btn btn-light" href="#" >Bloquear</a>
+                      <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >{% trans "Convidar Perfil" %}</a>
+                      <a class="btn btn-light" href="#" >{% trans "Bloquear" %}</a>
                   {% else %}
-                    <a class="btn btn-light" href="{% url 'change_pass' %}" >Trocar Senha</a>
+                    <a class="btn btn-light" href="{% url 'change_pass' %}" >{% trans "Trocar Senha" %}</a>
                   {% endif %}
               </div>
           </div>

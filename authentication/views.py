@@ -4,7 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm
 import django.contrib.auth.views as djangoAuthViews
 
 
-
 from django.shortcuts import *
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
