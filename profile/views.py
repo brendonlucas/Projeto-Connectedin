@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -26,8 +27,14 @@ def index(request):
 
 def show(request, profile_id):
     profile = User.objects.get(id=profile_id)
-    convites = Convite.objects.filter(solicitante=current_user(request).id)
-    args = {'profile': profile, 'current_user': current_user(request), 'convites': convites}
+    try:
+        convite = Convite.objects.get(solicitante=current_user(request).id, convidado=profile.id)
+        ja_tem_invite = True
+    except Convite.DoesNotExist:
+        ja_tem_invite = False
+        convite = None
+
+    args = {'profile': profile, 'current_user': current_user(request), 'ja_tem_invite': ja_tem_invite, 'convite': convite}
     return render(request, 'profile.html', args)
 
 
@@ -120,16 +127,31 @@ def page_admin(request):
 
 @login_required
 def convidar(request, profile_id):
-    perfil_a_convidar = User.objects.get(id=profile_id)
-    perfil_logado = current_user(request)
-    perfil_logado.convidar(perfil_a_convidar)
-    return redirect('index')
+    profile = User.objects.get(id=profile_id)
+    try:
+        convite = Convite.objects.get(solicitante=current_user(request).id, convidado=profile.id)
+        ja_tem_invite = True
+    except Convite.DoesNotExist:
+        ja_tem_invite = False
+        convite = None
+    if not ja_tem_invite:
+        perfil_a_convidar = User.objects.get(id=profile_id)
+        perfil_logado = current_user(request)
+        perfil_logado.convidar(perfil_a_convidar)
+        messages.success(request, "Pedido de amizade enviado")
+        return redirect('show_user', profile_id)
+
+    else:
+        messages.success(request, "Voce ja possue convite!")
+        return redirect('show_user', profile_id)
+
 
 
 @login_required
 def aceitar(request, invite_id):
     convite = Convite.objects.get(id=invite_id)
     convite.aceitar()
+    messages.success(request, "Aceita amizade")
     return redirect('index')
 
 
@@ -137,6 +159,7 @@ def aceitar(request, invite_id):
 def recusar(request, invite_id):
     convite = Convite.objects.get(id=invite_id)
     convite.recusar()
+    messages.success(request, "Recusado Pedido")
     return redirect('index')
 
 
@@ -144,4 +167,5 @@ def desfazer(request, perfil_id):
     perfil = User.objects.get(id=perfil_id)
     current_user(request).friendship.filter()
     perfil.desfazer()
+    messages.success(request, "Desfeito amizade")
     return redirect('index')

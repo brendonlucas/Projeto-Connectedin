@@ -22,8 +22,8 @@
                     {% if profile in current_user.friendship.all %}
                         <a class="btn btn-light" href="#" >Desfazer amizade</a>
                     {% else %}
-                        {% if profile in convites %}
-                            <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >Cancelar pedido</a>
+                        {% if ja_tem_invite %}
+                            <a class="btn btn-light" href="{% url 'refuse_friendship' convite.id %}" >Cancelar pedido</a>
                       {% else %}
                             <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >Invite Profile</a>
                       {% endif %}
