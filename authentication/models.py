@@ -35,3 +35,24 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def send_invite(self, recipient):
         self.invite.add(recipient=recipient)
+
+    def convidar(self, perfil_convidado):
+        convite = Convite(solicitante=self, convidado=perfil_convidado)
+        convite.save()
+
+    def desfazer(self, perfil_convidado):
+        convite = Convite(solicitante=self, convidado=perfil_convidado)
+        convite.save()
+
+
+class Convite(models.Model):
+    solicitante = models.ForeignKey(User, on_delete=models.CASCADE, related_name='convites_feitos')
+    convidado = models.ForeignKey(User, on_delete=models.CASCADE, related_name='convites_recebidos')
+
+    def aceitar(self):
+        self.solicitante.friendship.add(self.convidado)
+        self.convidado.friendship.add(self.solicitante)
+        self.delete()
+
+    def recusar(self):
+        self.delete()

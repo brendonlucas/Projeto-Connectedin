@@ -4,7 +4,7 @@ from django.shortcuts import render
 from profile.forms import FindUserForm
 from profile.models import Invite
 from django.shortcuts import redirect
-from authentication.models import User
+from authentication.models import User, Convite
 from posts.forms import PostForm, CommentForm
 from posts.models import Post
 from django.core.paginator import Paginator
@@ -106,10 +106,41 @@ def find_user_in_link(request, username):
 @login_required
 def page_admin(request):
     if current_user(request).is_superuser:
+        convites = Convite.objects.filter(solicitante=current_user(request).id)
         users = User.objects.all()
         paginador = Paginator(users, 10)
         page = request.GET.get('page')
         users = paginador.get_page(page)
-        return render(request, 'pag_superuser.html', {'current_user': current_user(request), 'profiles': users})
+        return render(request, 'pag_superuser.html', {'current_user': current_user(request), 'profiles': users,
+                                                      'convites': convites})
     else:
         return render(request, 'access_denied.html', {'current_user': current_user(request)})
+
+
+@login_required
+def convidar(request, profile_id):
+    perfil_a_convidar = User.objects.get(id=profile_id)
+    perfil_logado = current_user(request)
+    perfil_logado.convidar(perfil_a_convidar)
+    return redirect('index')
+
+
+@login_required
+def aceitar(request, invite_id):
+    convite = Convite.objects.get(id=invite_id)
+    convite.aceitar()
+    return redirect('index')
+
+
+@login_required
+def recusar(request, invite_id):
+    convite = Convite.objects.get(id=invite_id)
+    convite.recusar()
+    return redirect('index')
+
+
+def desfazer(request, perfil_id):
+    perfil = User.objects.get(id=perfil_id)
+    current_user(request).friendship.filter()
+    perfil.desfazer()
+    return redirect('index')

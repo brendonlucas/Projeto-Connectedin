@@ -3,7 +3,31 @@
 <div class="container">
     <div class="row">
         <div class="col col-sm-3">
-            Lado
+
+            {% with total=current_user.friendship.count %}
+            {% if total %}
+                <p > {{ total }} Contato{{ total|pluralize }} </p>
+            {% for perfil in current_user.friendship.all %}
+                <div>
+                    <ul>
+                         <li style="display:inline-block; background-color:#f3f3fb ;width:100%; margin-left:-40px;margin-top:5px;padding:5px; border-radius:5px">
+                            <a href="#"> {{ perfil.full_name }} </a>
+                             <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
+                                <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" class="dropdown-item">Aceitar</a></li>
+                                    <li><a href="#" class="dropdown-item">Recusar</a></li>
+                                    <li><a href="#" class="dropdown-item">Bloquear</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                        {% endfor %}
+            {% else %}
+                <p> Sem Contatos </p>
+            {% endif %}
+            {% endwith %}
         </div>
         <div class="col col-sm-6">
             <h4>Todos os Usuario:</h4>
@@ -32,7 +56,11 @@
                     <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Convidar</a>
+                        {% if profile.id in convites %}
+                            <a class="dropdown-item" href="{% url 'invite_friendship' profile.id %}">Cancelar solicitação</a>
+                        {% else %}
+                            <a class="dropdown-item" href="{% url 'invite_friendship' profile.id %}">Convidar</a>
+                        {% endif %}
                             <a class="dropdown-item" href="#">Bloquear</a>
                             {% if current_user.is_superuser %}
                                 {% if profile.is_superuser %}
@@ -70,9 +98,32 @@
             </ul>
             {% endif %}
         </div>
-        <div class="col col-sm-3">
-            Lado
-        </div>
+        <aside class="col col-sm-3">
+            {% with total=current_user.convites_recebidos.count %}
+                {% if total %}
+                <p> {{ total }} Convite{{ total|pluralize }} de Amizade </p>
+                {% for convite in current_user.convites_recebidos.all %}
+            <div >
+                <ul>
+                    <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
+                        <a href="#">{{ convite.solicitante.full_name }}</a>
+                        <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
+                            <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{% url 'accept_friendship' convite.id %}" class="dropdown-item">Aceitar</a></li>
+                                <li><a href="{% url 'refuse_friendship' convite.id %}" class="dropdown-item">Recusar</a></li>
+                                <li><a href="#" class="dropdown-item">Bloquear</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+                {% endfor %}
+            {% else %}
+                     <p> Sem convites </p>
+                {% endif %}
+            {% endwith %}
+        </aside>
     </div>
 </div>
 {% endblock %}
