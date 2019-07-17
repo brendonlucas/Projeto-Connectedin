@@ -1,3 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">ConnectedIn</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,6 +14,13 @@
         <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
+
+    {% for message in messages %}
+        <div class="toast toast-body" style="height:40px" data-autohide="true">
+          <p style="font-size:15px">{{ message }}</p>
+        </div>
+    {% endfor %}
+
     {% if current_user.is_authenticated %}
       <form class="form-inline" style="margin-right:10px" method="post" action="{% url 'find_user' %}">
       {% csrf_token %}
@@ -43,3 +54,9 @@
     {% endif %}
   </div>
 </nav>
+
+<script>
+$(document).ready(function(){
+  $('.toast').toast('show');
+});
+</script>

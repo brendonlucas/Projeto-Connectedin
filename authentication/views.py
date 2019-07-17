@@ -24,12 +24,21 @@ class RegisterUserView(View):
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             dados_form = form.cleaned_data
-            usuario = User.objects.create_user(username=dados_form['username'], 
-                                                email=dados_form['email'],
-                                                photo=dados_form['photo'], 
-                                                password=dados_form['password'], 
-                                                first_name=dados_form['first_name'], 
-                                                last_name=dados_form['last_name'])
+            print(dados_form['photo'])
+            if dados_form['photo'] is None:
+                print('e')
+                usuario = User.objects.create_user(username=dados_form['username'],
+                                                    email=dados_form['email'],
+                                                    password=dados_form['password'],
+                                                    first_name=dados_form['first_name'],
+                                                    last_name=dados_form['last_name'])
+            else:
+                usuario = User.objects.create_user(username=dados_form['username'],
+                                                   email=dados_form['email'],
+                                                   photo=dados_form['photo'],
+                                                   password=dados_form['password'],
+                                                   first_name=dados_form['first_name'],
+                                                   last_name=dados_form['last_name'])
 
             # usuario_dados = Perfil(telefone=dados_form['telefone'], nome_empresa=dados_form['nome_empresa'],
             #                        user=usuario)
