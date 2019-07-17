@@ -2,8 +2,7 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col col-sm-3">
-
+        <nav class="col col-sm-3">
             {% with total=current_user.friendship.count %}
             {% if total %}
                 <p > {{ total }} Contato{{ total|pluralize }} </p>
@@ -28,7 +27,7 @@
                 <p> Sem Contatos </p>
             {% endif %}
             {% endwith %}
-        </div>
+        </nav>
         <div class="col col-sm-6">
             <h4>Todos os Usuario:</h4>
             {% if notice %}
@@ -121,6 +120,32 @@
                 {% endfor %}
             {% else %}
                      <p> Sem convites </p>
+                {% endif %}
+            {% endwith %}
+
+            <hr>
+            {% with total=current_user.convites_feitos.count %}
+                {% if total %}
+                    <p> {{ total }} Convite{{ total|pluralize }} feito</p>
+                        {% for convite in current_user.convites_feitos.all %}
+                        <div>
+                            <ul>
+                            <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
+                                    <a href="#"> {{ convite.convidado.full_name }} </a>
+                                        <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
+                                            <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
+                                                <ul class="dropdown-menu" role="menu" style="background-color: white">
+                                                    <li><a href="{% url 'refuse_friendship' convite.id %}" class="dropdown-item">Cancelar</a></li>
+                                                </ul>
+                                        </div>
+                            </li>
+                                </ul>
+
+                        </div>
+                        {% endfor %}
+
+                {% else %}
+                    <p class="name_box"> Sem convites </p>
                 {% endif %}
             {% endwith %}
         </aside>

@@ -26,7 +26,8 @@ def index(request):
 
 def show(request, profile_id):
     profile = User.objects.get(id=profile_id)
-    args = {'profile': profile, 'current_user': current_user(request)}
+    convites = Convite.objects.filter(solicitante=current_user(request).id)
+    args = {'profile': profile, 'current_user': current_user(request), 'convites': convites}
     return render(request, 'profile.html', args)
 
 
