@@ -1,4 +1,6 @@
 from datetime import date
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -22,12 +24,14 @@ def report_post(request, post_id):
                     dados = form.cleaned_data
                     comment = dados['comment']
                     currrent_date = date.today()
+                    messages.success(request, 'Reportado com sucesso.')
                     Report(post=post, comment=comment, date_report=currrent_date, amount=0).save()
                     return redirect('index')
                 else:
                     dados = form.cleaned_data
                     comment = dados['comment']
                     currrent_date = date.today()
+                    messages.success(request, 'Reportado com sucesso.')
                     Report(post=post, comment=comment, date_report=currrent_date, amount=1).save()
                     return redirect('index')
 
@@ -61,6 +65,7 @@ def delete_report(request, report_id):
         all_reports = Report.objects.filter(post_id=report.post)
         for report_current in all_reports:
             Report.objects.get(id=report_current.id).delete()
+        messages.success(request, 'Report deletado!.')
         return redirect('show_reports')
     else:
         return render(request, 'access_denied.html', {'current_user': get_current_user(request)})
@@ -71,6 +76,7 @@ def delete_post_reported(request, post_id):
     if get_current_user(request).is_superuser:
         post = Post.objects.get(id=post_id)
         post.delete()
+        messages.success(request, 'Deletado com sucesso.')
         return redirect('show_reports')
     else:
         return render(request, 'access_denied.html', {'current_user': get_current_user(request)})
