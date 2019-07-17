@@ -1,5 +1,6 @@
 from django import forms
 from authentication.models import User
+from django.utils.translation import ugettext_lazy as _
 
 
 class SendEmailForm(forms.Form):
@@ -8,12 +9,12 @@ class SendEmailForm(forms.Form):
     def is_valid(self):
         valid = True
         if not super(SendEmailForm, self).is_valid():
-            self.adiciona_erro('Por favor, verifique os dados informados')
+            self.adiciona_erro(_('Por favor, verifique os dados informados'))
             valid = False
 
         user_exists = User.objects.filter(email=self.cleaned_data['email']).exists()
         if not user_exists:
-            self.adiciona_erro('Email solicitado não esta registrado.')
+            self.adiciona_erro(_('Email solicitado não esta registrado.'))
             valid = False
         return valid
 

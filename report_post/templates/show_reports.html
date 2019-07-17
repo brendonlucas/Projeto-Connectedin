@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 {% block body %}
+{% load i18n %}
+
 <div class="container">
     <div class="" style="margin-left: auto; margin-right: auto; ">
         {% if reports %}
             {% for report in reports %}
                 {% if report.amount > 0%}
                 <div style="border-radius:5px; max-width:500px ;margin-left: auto; margin-right: auto; background-color:#f3f3fb; padding:6px;">
-                <p>Publicado em {{ report.post.pub_date }}</p>
+                <p>{% trans "Publicado em" %} {{ report.post.pub_date }}</p>
                 <p>{{ report.post.content }}</p>
                 <p>
                     {% if report.post.image %}
                         <img src="{{ report.post.image.url }}" style="max-width: 100%">
                     {% endif %}
                 </p>
-                <a href="{% url 'delete_post_reported' report.post.id %}" class="btn btn-danger btn-sm">Deletar Postagem</a>
-                <a href="{% url 'delete_report' report.id %}" class="btn btn-danger btn-sm">Rejeitar</a>
-                <a href="{% url 'show_comments_report' report.id %}" class="btn btn-primary btn-sm">Denuncias</a>
-                <p style="float:right"> Total: {{ report.amount }}</p>
+                <a href="{% url 'delete_post_reported' report.post.id %}" class="btn btn-danger btn-sm">{% trans "Deletar Postagem" %}</a>
+                <a href="{% url 'delete_report' report.id %}" class="btn btn-danger btn-sm">{% trans "Rejeitar" %}</a>
+                <a href="{% url 'show_comments_report' report.id %}" class="btn btn-primary btn-sm">{% trans "Denuncias" %}</a>
+                <p style="float:right"> {% trans "Total:" %} {{ report.amount }}</p>
             </div>
             <br>
         {% endif %}
@@ -25,7 +27,7 @@
           <ul class="pagination" style="margin-left:50%">
             {% if reports.has_previous %}
               <li class="page-item">
-                <a class="page-link" href="?page={{ reports.previous_page_number }}" tabindex="-1">Anterior</a>
+                <a class="page-link" href="?page={{ reports.previous_page_number }}" tabindex="-1">{% trans "Anterior" %}</a>
               </li>
             {% endif %}
             {% for num in reports.paginator.page_range %}
@@ -39,14 +41,14 @@
               {% endfor %}
               {% if reports.has_next %}
                 <li class="page-item">
-                  <a class="page-link" href="?page={{ reports.next_page_number }}">Próximo</a>
+                  <a class="page-link" href="?page={{ reports.next_page_number }}">{% trans "Próximo" %}</a>
                 </li>
               {% endif %}
           </ul>
         {% endif %}
         {% else %}
             <div style="max-width:500px ;margin-left: auto; margin-right: auto; background-color:pink; padding:6px;">
-                <h5> Esta tudo Tranquilo :) </h5>
+                <h5> {% trans "Está tudo Tranquilo :)" %} </h5>
             </div>
         {% endif %}
     </div>

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
+{% load i18n %}
 
 <div class="container">
     <div class="row">
@@ -19,19 +20,21 @@
                         <div class="btn-group btn-group float-right" >
                             {% if current_user.id != user.id %}
                             <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções</a>
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans "Opções" %}</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
                                     {% if user in current_user.friendship.all %}
                                         <a class="dropdown-item" href="{% url 'remove_friendship' user.id %}">Desfazer</a>
                                     {% else %}
-                                        <a class="dropdown-item" href="{% url 'invite_friendship' user.id %}">Convidar</a>
+                                        <a class="dropdown-item" href="{% url 'invite_friendship' user.id %}">{% trans "Convidar" %}</a>
                                     {% endif %}
-                                    <a class="dropdown-item" href="#">Bloquear</a>
+                                    <a class="dropdown-item" href="#">{% trans "Bloquear" %}</a>
+
                                     {% if current_user.is_superuser %}
                                         {% if user.is_superuser %}
-                                            <a class="dropdown-item" href="{% url 'set_admin' user.id %}">Retirar dos Administradores</a>
+                                            <a class="dropdown-item" href="{% url 'set_admin' user.id %}">{% trans "Retirar dos Administradores" %}</a>
                                         {% else %}
-                                            <a class="dropdown-item" href="{% url 'set_admin' user.id %}">Tornar Administrador</a>
+                                            <a class="dropdown-item" href="{% url 'set_admin' user.id %}">{% trans "Tornar Administrador" %}</a>
                                         {% endif %}
                                     {% endif %}
                                 </div>
@@ -45,7 +48,7 @@
             <ul class="pagination" style="margin-left:50%">
                 {% if users.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1">Anterior</a>
+                    <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1">{% trans "Anterior" %}</a>
                 </li>
                 {% endif %}
                 {% for num in users.paginator.page_range %}
@@ -59,13 +62,13 @@
                 {% endfor %}
                 {% if users.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ users.next_page_number }}">Próximo</a>
+                    <a class="page-link" href="?page={{ users.next_page_number }}">{% trans "Próximo" %}</a>
                 </li>
                 {% endif %}
             </ul>
                 {% endif %}
         {% else %}
-            <p> Não foi possivel encontrar o usuario solicitado :(</p>
+            <p> {% trans "Não foi possivel encontrar o usuario solicitado :(" %}</p>
         {% endif %}
     </div>
 </div>

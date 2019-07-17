@@ -1,0 +1,280 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-16 23:57-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: authentication/forms.py:17 recovery_pass/forms.py:12
+msgid "Please check the reported data"
+msgstr "Por favor, verifique os dados informados"
+
+#: authentication/forms.py:22
+msgid "User already exist."
+msgstr "Usuário já existente."
+
+#: authentication/forms.py:27
+msgid "Email já cadastrado."
+msgstr ""
+
+#: authentication/templates/login.html:19
+msgid "Usuario:"
+msgstr ""
+
+#: authentication/templates/login.html:21
+msgid "Senha:"
+msgstr ""
+
+#: authentication/templates/login.html:24
+#: authentication/templates/registrar.html:25
+#: recovery_pass/templates/pag_change_password.html:25
+msgid "Confirmar"
+msgstr ""
+
+#: authentication/templates/login.html:25
+msgid "Criar uma conta."
+msgstr ""
+
+#: authentication/templates/login.html:27
+msgid "Esqueci minha senha."
+msgstr ""
+
+#: authentication/templates/login.html:33
+msgid "Por favor, verifique o Email e/ou Senha informados"
+msgstr ""
+
+#: authentication/templates/recuperar_senha.html:8
+msgid "Recuperar conta"
+msgstr ""
+
+#: authentication/templates/recuperar_senha.html:10
+#: recovery_pass/templates/pag_recovery.html:19
+msgid "Email:"
+msgstr ""
+
+#: authentication/templates/recuperar_senha.html:14
+#: recovery_pass/templates/pag_recovery.html:21
+#: recovery_pass/templates/pag_redefine_password.html:21
+msgid "Enviar"
+msgstr ""
+
+#: authentication/templates/registrar.html:12
+msgid "Registre-se"
+msgstr ""
+
+#: authentication/templates/registrar.html:26
+msgid "Já tenho uma conta."
+msgstr ""
+
+#: posts/forms.py:16
+msgid "Seu post precisa de um texto ou uma imagem"
+msgstr ""
+
+#: posts/forms.py:33
+msgid "Seu comentário precisa de um conteúdo"
+msgstr ""
+
+#: posts/templates/add_post.html:20
+msgid "Publicar"
+msgstr ""
+
+#: posts/templates/post_list.html:18 report_post/templates/report_post.html:9
+#: report_post/templates/show_reports.html:11
+msgid "Publicado em"
+msgstr ""
+
+#: posts/templates/post_list.html:34
+msgid "Excluir Postagem"
+msgstr ""
+
+#: posts/templates/post_list.html:40
+msgid "Deseja excluir a postagem?"
+msgstr ""
+
+#: posts/templates/post_list.html:43
+msgid "Fechar"
+msgstr ""
+
+#: posts/templates/post_list.html:44
+msgid "Excluir"
+msgstr ""
+
+#: posts/templates/post_list.html:49
+msgid "Denunciar"
+msgstr ""
+
+#: posts/templates/post_list.html:60 report_post/templates/report_post.html:23
+msgid "Comentar"
+msgstr ""
+
+#: posts/templates/post_list.html:82 profile/templates/find_user.html:45
+#: profile/templates/pag_superuser.html:55
+#: report_post/templates/show_comments_report.html:18
+#: report_post/templates/show_reports.html:30
+msgid "Anterior"
+msgstr ""
+
+#: posts/templates/post_list.html:98 profile/templates/find_user.html:59
+#: profile/templates/pag_superuser.html:69
+#: report_post/templates/show_comments_report.html:32
+#: report_post/templates/show_reports.html:44
+msgid "Próximo"
+msgstr ""
+
+#: profile/templates/find_user.html:23 profile/templates/pag_superuser.html:35
+msgid "Opções"
+msgstr ""
+
+#: profile/templates/find_user.html:25 profile/templates/pag_superuser.html:37
+msgid "Convidar"
+msgstr ""
+
+#: profile/templates/find_user.html:26 profile/templates/pag_superuser.html:38
+#: profile/templates/profile.html:25
+msgid "Bloquear"
+msgstr ""
+
+#: profile/templates/find_user.html:29 profile/templates/pag_superuser.html:41
+msgid "Retirar dos Administradores"
+msgstr ""
+
+#: profile/templates/find_user.html:31 profile/templates/pag_superuser.html:43
+msgid "Tornar Administrador"
+msgstr ""
+
+#: profile/templates/find_user.html:65
+msgid "Não foi possivel encontrar o usuario solicitado :("
+msgstr ""
+
+#: profile/templates/pag_superuser.html:11
+msgid "Todos os Usuarios:"
+msgstr ""
+
+#: profile/templates/profile.html:24
+msgid "Convidar Perfil"
+msgstr ""
+
+#: profile/templates/profile.html:27
+msgid "Trocar Senha"
+msgstr ""
+
+#: recovery_pass/forms.py:17
+msgid "Email solicitado não esta registrado."
+msgstr ""
+
+#: recovery_pass/templates/pag_change_password.html:15
+msgid "Alterar Senha"
+msgstr ""
+
+#: recovery_pass/templates/pag_change_password.html:21
+msgid "Senha atual:"
+msgstr ""
+
+#: recovery_pass/templates/pag_change_password.html:23
+msgid "Senha nova:"
+msgstr ""
+
+#: recovery_pass/templates/pag_link_has_expired.html:13
+msgid "Link Expirou"
+msgstr ""
+
+#: recovery_pass/templates/pag_link_has_expired.html:17
+msgid "Link ja expirou ou não existe!"
+msgstr ""
+
+#: recovery_pass/templates/pag_recovery.html:13
+msgid "Recuperar Senha"
+msgstr ""
+
+#: recovery_pass/templates/pag_redefine_password.html:13
+msgid "Redefinir senha"
+msgstr ""
+
+#: recovery_pass/templates/pag_redefine_password.html:19
+msgid "Nova senha:"
+msgstr ""
+
+#: recovery_pass/views.py:91
+msgid "Link para recuperar senha do connectedin \n"
+msgstr ""
+
+#: recovery_pass/views.py:93
+msgid "Email para recuperacao"
+msgstr ""
+
+#: recovery_pass/views.py:117
+msgid "A Senha informada não confere com sua conta!"
+msgstr ""
+
+#: report_post/templates/access_denied.html:7
+msgid "Acesso negado :("
+msgstr ""
+
+#: report_post/templates/report_post.html:21
+msgid "Comentario sobre a denúncia:"
+msgstr ""
+
+#: report_post/templates/show_comments_report.html:9
+msgid "Reportado em"
+msgstr ""
+
+#: report_post/templates/show_comments_report.html:10
+msgid "Descrição:"
+msgstr ""
+
+#: report_post/templates/show_reports.html:18
+msgid "Deletar Postagem"
+msgstr ""
+
+#: report_post/templates/show_reports.html:19
+msgid "Rejeitar"
+msgstr ""
+
+#: report_post/templates/show_reports.html:20
+msgid "Denuncias"
+msgstr ""
+
+#: report_post/templates/show_reports.html:21
+msgid "Total:"
+msgstr ""
+
+#: report_post/templates/show_reports.html:51
+msgid "Está tudo Tranquilo :)"
+msgstr ""
+
+#: templates/_header.html:12
+msgid "atual"
+msgstr ""
+
+#: templates/_header.html:26
+msgid "Hello"
+msgstr "Olá"
+
+#: templates/_header.html:29
+msgid "O"
+msgstr ""
+
+#: templates/_header.html:34
+msgid "Página do Admin"
+msgstr ""
+
+#: templates/_header.html:35
+msgid "Denúncias"
+msgstr ""
+
+#: templates/_header.html:38
+msgid "Sair"
+msgstr ""

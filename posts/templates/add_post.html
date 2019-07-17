@@ -1,4 +1,6 @@
 {% load widget_tweaks %}
+{% load i18n %}
+
 <style>
     textarea{
         max-height:100px;
@@ -15,7 +17,7 @@
             {% render_field field class+="form-control" %}
         </div>
     {% endfor%}
-    <button class="btn btn-primary" type="submit">Publicar</button>
+    <button class="btn btn-primary" type="submit">{% trans "Publicar" %}</button>
     
     {% if form.errors %}
         <div class="alert alert-danger">

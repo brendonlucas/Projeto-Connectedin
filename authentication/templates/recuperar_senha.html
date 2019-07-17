@@ -1,15 +1,17 @@
 {% extends 'base_usuario.html' %}
 {% block body %}
+{% load i18n %}
+
 <title> gg</title>
 <div class="content_down22" style="height:100%">
 <div class="contedudo_22" style="margin-top: 100px;">
-    <p class="name_titulo_2"> Recuperar conta</p><br>
+    <p class="name_titulo_2"> {% trans "Recuperar conta" %}</p><br>
         <form class="form_user2">
-         <label class="name_login2" for="user"> Email: </label>
+         <label class="name_login2" for="user"> {% trans "Email:" %} </label>
             <input class="input_custon2" id="user" type="email" placeholder="Example@email.com" required>
                 <br>
                 <br>
-            <button class="bt_logar2" type="submit" >Enviar</button>
+            <button class="bt_logar2" type="submit" >{% trans "Enviar" %}</button>
         </form>
     <img class="img_titulo_2" src="https://i.ibb.co/zQB5zCS/K82jQtY.png" alt="logo">
 </div>

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block body %}
+{% load i18n %}
+
 <div class="container">
     <div class="row">
         <div class="col col-sm-4 offset-4">
@@ -8,11 +10,11 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Link Expirou
+                        {% trans "Link Expirou" %}
                     </h4>
                 </div>
                 <div class="card-body">
-                    Link ja expirou ou não existe!
+                    {% trans "Link ja expirou ou não existe!" %}
 
                 </div>
             </div>

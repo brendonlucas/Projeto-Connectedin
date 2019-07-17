@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
+{% load i18n %}
+
 <div class="container">
     <div class="row">
         <nav class="col col-sm-3">
@@ -10,11 +12,13 @@
                 <div>
                     <ul>
                          <li style="display:inline-block; background-color:#f3f3fb ;width:100%; margin-left:-40px;margin-top:5px;padding:5px; border-radius:5px">
+
                             <a href="{% url 'show_user' perfil.id %}"> {{ perfil.full_name }} </a>
                              <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
                                 <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{% url 'remove_friendship' perfil.id %}" class="dropdown-item">Desfazer</a></li>
+
                                     <li><a href="#" class="dropdown-item">Bloquear</a></li>
                                 </ul>
                             </div>
@@ -28,10 +32,10 @@
             {% endwith %}
         </nav>
         <div class="col col-sm-6">
-            <h4>Todos os Usuario:</h4>
+            <h4>{% trans "Todos os Usuarios:" %}</h4>
             {% if notice %}
             <p class="alert alert-{{notice.type}}">
-                {{notice.content}}
+                {{ notice.content }}
             </p>
             {% endif %}
             {% for profile in profiles %}
@@ -52,19 +56,21 @@
                 </div>
                 {% if current_user.id != profile.id %}
                     <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções</a>
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans "Opções" %}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
                         {% if profile.id in convites %}
                             <a class="dropdown-item" href="{% url 'invite_friendship' profile.id %}">Cancelar solicitação</a>
                         {% else %}
-                            <a class="dropdown-item" href="{% url 'invite_friendship' profile.id %}">Convidar</a>
+                            <a class="dropdown-item" href="{% url 'invite_friendship' profile.id %}">{% trans "Convidar" %}</a>
                         {% endif %}
-                            <a class="dropdown-item" href="#">Bloquear</a>
+                            <a class="dropdown-item" href="#">{% trans "Bloquear" %}</a>
+
                             {% if current_user.is_superuser %}
                                 {% if profile.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">Retirar dos Administradores</a>
+                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">{% trans "Retirar dos Administradores" %}</a>
                                 {% else %}
-                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">Tornar Administrador</a>
+                                    <a class="dropdown-item" href="{% url 'set_admin' profile.id %}">{% trans "Tornar Administrador" %}</a>
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -76,13 +82,13 @@
             <ul class="pagination" style="margin-left:50%">
                 {% if profiles.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ profiles.previous_page_number }}" tabindex="-1">Anterior</a>
+                    <a class="page-link" href="?page={{ profiles.previous_page_number }}" tabindex="-1">{% trans "Anterior" %}</a>
                 </li>
                 {% endif %}
                 {% for num in profiles.paginator.page_range %}
                 {% if profiles.number == num %}
                 <li class="page-item active">
-                    <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+                    <a class="page-link" href="#">{{ num }} <span class="sr-only">({% trans "atual" %})</span></a>
                 </li>
                 {% elif num > profiles.number|add:'-3' and num < profiles.number|add:3 %}
                 <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
@@ -90,7 +96,7 @@
                 {% endfor %}
                 {% if profiles.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ profiles.next_page_number }}">Próximo</a>
+                    <a class="page-link" href="?page={{ profiles.next_page_number }}">{% trans "Próximo" %}</a>
                 </li>
                 {% endif %}
             </ul>
@@ -99,18 +105,24 @@
         <aside class="col col-sm-3">
             {% with total=current_user.convites_recebidos.count %}
                 {% if total %}
-                <p> {{ total }} Convite{{ total|pluralize }} de Amizade </p>
+
+                <p> {{ total }} {% trans "Convite" %}{{ total|pluralize }} {% trans "de Amizade" %} </p>
+
                 {% for convite in current_user.convites_recebidos.all %}
             <div >
                 <ul>
                     <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
+
                         <a href="{% url 'show_user' convite.solicitante.id %}">{{ convite.solicitante.full_name }}</a>
+
                         <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
                             <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{% url 'accept_friendship' convite.id %}" class="dropdown-item">Aceitar</a></li>
                                 <li><a href="{% url 'refuse_friendship' convite.id %}" class="dropdown-item">Recusar</a></li>
-                                <li><a href="#" class="dropdown-item">Bloquear</a></li>
+
+                                <li><a href="#" class="dropdown-item">{% trans "Bloquear" %}</a></li>
+
                             </ul>
                         </div>
                     </li>
@@ -118,19 +130,25 @@
             </div>
                 {% endfor %}
             {% else %}
-                     <p> Sem convites </p>
+
+                     <p> {% trans "Sem convites" %} </p>
+
                 {% endif %}
             {% endwith %}
 
             <hr>
             {% with total=current_user.convites_feitos.count %}
                 {% if total %}
-                    <p> {{ total }} Convite{{ total|pluralize }} feito</p>
+
+                    <p> {{ total }} {% trans "Convite" %}{{ total|pluralize }} {% trans "feito" %}</p>
+
                         {% for convite in current_user.convites_feitos.all %}
                         <div>
                             <ul>
                             <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
+
                                     <a href="{% url 'show_user' convite.convidado.id %}"> {{ convite.convidado.full_name }} </a>
+
                                         <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
                                             <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
                                                 <ul class="dropdown-menu" role="menu" style="background-color: white">
@@ -144,7 +162,9 @@
                         {% endfor %}
 
                 {% else %}
-                    <p class="name_box"> Sem convites </p>
+
+                    <p class="name_box"> {% trans "Sem convites" %} </p>
+
                 {% endif %}
             {% endwith %}
         </aside>

@@ -1,5 +1,6 @@
 from profile.models import User
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 
 class UserRegisterForm(forms.Form):
@@ -13,17 +14,17 @@ class UserRegisterForm(forms.Form):
     def is_valid(self):
         valid = True
         if not super(UserRegisterForm, self).is_valid():
-            self.add_erro('Por favor, verifique os dados informados')
+            self.add_erro(_('Por favor, verifique os dados informados'))
             valid = False
 
         user_exists = User.objects.filter(username=self.cleaned_data['username']).exists()
         if user_exists:
-            self.add_erro('Usuário já existente.')
+            self.add_erro(_('Usuário já existente.'))
             valid = False
 
         email_exists = User.objects.filter(email=self.cleaned_data['email']).exists()
         if email_exists:
-            self.add_erro('Email já cadastrado.')
+            self.add_erro(_('Email já cadastrado.'))
             valid = False
         return valid
 

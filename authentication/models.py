@@ -41,6 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         convite.save()
 
 
+
 class Convite(models.Model):
     solicitante = models.ForeignKey(User, on_delete=models.CASCADE, related_name='convites_feitos')
     convidado = models.ForeignKey(User, on_delete=models.CASCADE, related_name='convites_recebidos')
