@@ -22,8 +22,14 @@
                             <a class="btn btn-sm btn-primary" href="" role="button" id="dropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans "Opções" %}</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">{% trans "Convidar" %}</a>
+
+                                    {% if user in current_user.friendship.all %}
+                                        <a class="dropdown-item" href="{% url 'remove_friendship' user.id %}">Desfazer</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'invite_friendship' user.id %}">{% trans "Convidar" %}</a>
+                                    {% endif %}
                                     <a class="dropdown-item" href="#">{% trans "Bloquear" %}</a>
+
                                     {% if current_user.is_superuser %}
                                         {% if user.is_superuser %}
                                             <a class="dropdown-item" href="{% url 'set_admin' user.id %}">{% trans "Retirar dos Administradores" %}</a>

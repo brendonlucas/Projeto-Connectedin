@@ -40,9 +40,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         convite = Convite(solicitante=self, convidado=perfil_convidado)
         convite.save()
 
-    def desfazer(self, perfil_convidado):
-        convite = Convite(solicitante=self, convidado=perfil_convidado)
-        convite.save()
 
 
 class Convite(models.Model):
