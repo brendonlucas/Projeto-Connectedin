@@ -23,9 +23,7 @@ class RegisterUserView(View):
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             dados_form = form.cleaned_data
-            print(dados_form['photo'])
             if dados_form['photo'] is None:
-                print('e')
                 usuario = User.objects.create_user(username=dados_form['username'],
                                                     email=dados_form['email'],
                                                     password=dados_form['password'],

@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 {% block body %}
 {% load i18n %}
+<style>
+    input[type='file'] {
+      display: none
+
+    }
+
+    /* Aparência que terá o seletor de arquivo */
+    label {
+      background-color: #3498db;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      padding: 6px 20px
+    }
+
+</style>
 
 <div class="page-header">
   <div class="container">
@@ -21,8 +37,6 @@
               <br>
               <div class="btn-group">
                   {% if profile.id != current_user.id %}
-                      <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >{% trans "Convidar Perfil" %}</a>
-                      <a class="btn btn-light" href="#" >{% trans "Bloquear" %}</a>
                     {% if profile in current_user.friendship.all %}
                         <a class="btn btn-light" href="#" >{% trans "Desfazer amizade" %}</a>
 
@@ -30,7 +44,7 @@
                         {% if ja_tem_invite %}
                             <a class="btn btn-light" href="{% url 'refuse_friendship' convite.id %}" >Cancelar pedido</a>
                       {% else %}
-                            <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >Invite Profile</a>
+                            <a class="btn btn-light" href="{% url 'invite_friendship' profile.id %}" >{% trans "Convidar Perfil" %}</a>
                       {% endif %}
                     {% endif %}
 
@@ -38,6 +52,14 @@
 
                   {% else %}
                     <a class="btn btn-light" href="{% url 'change_pass' %}" >{% trans "Trocar Senha" %}</a>
+                  <form method="POST" action="{% url 'new_image' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <label class="btn btn-light" for='selecao-arquivo'>Foto Perfil</label>
+                        <input id='selecao-arquivo' type='file' name="poto_perfil" required>
+                        <button type="submit"> ></button>
+
+                  </form>
                   {% endif %}
               </div>
           </div>

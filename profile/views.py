@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from profile.forms import FindUserForm
+from profile.forms import FindUserForm, ChangeImagePerfil
 from profile.models import Invite
 from django.shortcuts import redirect
 from authentication.models import User, Convite
@@ -34,8 +34,8 @@ def show(request, profile_id):
     except Convite.DoesNotExist:
         ja_tem_invite = False
         convite = None
-
-    args = {'profile': profile, 'current_user': current_user(request), 'ja_tem_invite': ja_tem_invite, 'convite': convite}
+    args = {'profile': profile, 'current_user': current_user(request), 'ja_tem_invite': ja_tem_invite,
+            'convite': convite, 'forms': ChangeImagePerfil()}
     return render(request, 'profile.html', args)
 
 
@@ -147,7 +147,6 @@ def convidar(request, profile_id):
         return redirect('show_user', profile_id)
 
 
-
 @login_required
 def aceitar(request, invite_id):
     convite = Convite.objects.get(id=invite_id)
@@ -171,3 +170,20 @@ def desfazer(request, profile_id):
     perfil.friendship.remove(current_user(request))
     messages.success(request, "Desfeito amizade")
     return redirect('index')
+
+
+def change_image(request):
+    user = current_user(request)
+    if request.method == 'POST':
+        form = ChangeImagePerfil(request.POST, request.FILES)
+        if form.is_valid():
+            dados_form = form.cleaned_data
+            s = dados_form['poto_perfil']
+            user.photo = s
+            user.save()
+            return redirect('show_user', current_user(request).id)
+        else:
+            print("tadda")
+            return redirect('show_user', current_user(request).id)
+    else:
+        return redirect('show_user', current_user(request).id)

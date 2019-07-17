@@ -12,7 +12,11 @@
                 <div>
                     <ul>
                          <li style="display:inline-block; background-color:#f3f3fb ;width:100%; margin-left:-40px;margin-top:5px;padding:5px; border-radius:5px">
-
+                        {% if perfil.photo.url != null %}
+                              <img src="{{ perfil.photo.url }}" width="25" height="25" style="border-radius:50%">
+                            {% else %}
+                               <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" width="25" height="25" style="border-radius:50%" alt="gg">
+                            {% endif %}
                             <a href="{% url 'show_user' perfil.id %}"> {{ perfil.full_name }} </a>
                              <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
                                 <img src="https://uploaddeimagens.com.br/images/002/167/233/original/config.png" width="20px" height="20px" data-toggle="dropdown"  alt="config">
@@ -112,7 +116,12 @@
             <div >
                 <ul>
                     <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
+                        {% if convite.solicitante.photo.url != null %}
+                            <img src="{{ convite.solicitante..photo.url }}" width="25" height="25" style="border-radius:50%" alt="gg">
+                              {% else %}
+                                <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" width="25" height="25" style="border-radius:50%" alt="gg">
 
+                            {% endif %}
                         <a href="{% url 'show_user' convite.solicitante.id %}">{{ convite.solicitante.full_name }}</a>
 
                         <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">
@@ -145,8 +154,12 @@
                         {% for convite in current_user.convites_feitos.all %}
                         <div>
                             <ul>
-                            <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
-
+                                <li style="display:inline-block; background-color:#f3f3fb ;  width:100%; margin-top:5px;padding:5px; border-radius:5px">
+                                    {% if convite.convidado.photo.url != null %}
+                                    <img src="{{convite.convidado.photo.url}}" width="25" height="25" style="border-radius:50%">
+                                    {% else %}
+                                <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" width="25" height="25" style="border-radius:50%">
+                            {% endif %}
                                     <a href="{% url 'show_user' convite.convidado.id %}"> {{ convite.convidado.full_name }} </a>
 
                                         <div class="btn-group dropleft"  style="float: right; margin-top: auto; margin-bottom: auto; margin-left: auto;">

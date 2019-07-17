@@ -15,6 +15,14 @@
 
 {% for post in posts %}
 <div style="padding:5px; background-color:#f3f3fb; border-radius:5px">
+    <div>
+        {% if post.user.photo.url == null %}
+            <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" width="40" height="40" style="border-radius:50%">
+        {% else %}
+            <img src="{{ post.user.photo.url }}" width="40" height="40" style="border-radius:50%">
+        {% endif %}
+    <a href="{% url 'show_user' post.user.id %}">{{ post.user.full_name }} </a>
+    </div>
     <p>{% trans "Publicado em" %} {{ post.pub_date }}</p>
     <p>{{ post.content }}</p>
     
